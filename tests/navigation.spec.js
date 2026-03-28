@@ -57,4 +57,29 @@ test.describe('Tab navigation', () => {
     await page.locator('.toggle-btn[data-mode="pro"]').click();
     await expect(page.locator('#resume-pro')).toHaveClass(/active/);
   });
+
+  test('URL hash updates on tab navigation', async ({ page }) => {
+    const tabs = page.locator('.tab');
+    await tabs.nth(2).click();
+    await page.waitForTimeout(600);
+    expect(page.url()).toContain('#menu');
+
+    await tabs.nth(4).click();
+    await page.waitForTimeout(600);
+    expect(page.url()).toContain('#gift');
+  });
+
+  test('loading with hash navigates to correct page', async ({ page }) => {
+    await page.goto('/#gift');
+    await page.waitForTimeout(1000);
+    await expect(page.locator('#gift')).toHaveClass(/active/);
+  });
+
+  test('all tab labels are visible (not just active)', async ({ page }) => {
+    const labels = page.locator('.tab-label');
+    const count = await labels.count();
+    for (let i = 0; i < count; i++) {
+      await expect(labels.nth(i)).toBeVisible();
+    }
+  });
 });
