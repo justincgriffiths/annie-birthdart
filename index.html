@@ -66,9 +66,9 @@
             -webkit-tap-highlight-color: transparent; white-space: nowrap;
         }
         .tab-icon { font-size: 1.05rem; line-height: 1; }
-        .tab-label { display: none; }
+        .tab-label { font-size: 0.5rem; color: var(--cream-30); }
         .tab.active { background: var(--orange-bg); color: var(--orange); box-shadow: 0 2px 0 var(--orange) inset; }
-        .tab.active .tab-label { display: inline; }
+        .tab.active .tab-label { color: var(--orange); }
 
         /* ===== APP SHELL ===== */
         .app {
@@ -252,7 +252,7 @@
 
     <!-- HOME -->
     <section class="page active" id="home">
-        <div class="page-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%">
+        <div class="page-content" style="display:flex;flex-direction:column;align-items:center;padding-top:8vh">
             <svg class="hero-snake-svg" viewBox="0 0 200 70" fill="none" aria-hidden="true">
                 <path class="snake-body" d="M8,35 C30,8 50,62 80,35 C110,8 130,62 160,35 C180,18 192,35 195,35" stroke="url(#sg)" stroke-width="6" stroke-linecap="round"/>
                 <path d="M193,35 L200,30 M193,35 L200,40" stroke="var(--coral)" stroke-width="2.5" stroke-linecap="round"/>
@@ -423,7 +423,7 @@
 
     <!-- GIFT -->
     <section class="page" id="gift">
-        <div class="page-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%">
+        <div class="page-content" style="display:flex;flex-direction:column;align-items:center;padding-top:20vh">
             <div class="gift-header si"><h2>One More Thing&hellip;</h2></div>
             <p class="gift-lead si">You hate gifts. We know.</p>
             <p class="gift-but si">But&hellip;</p>
@@ -530,7 +530,22 @@ let cur=0,busy=false;
 
 window.addEventListener('load',()=>{
     document.querySelector('.snake-body')?.classList.add('drawn');
-    reveal('home');
+    const hash=location.hash.replace('#','');
+    const startIdx=ids.indexOf(hash);
+    if(startIdx>0){
+        document.getElementById('home').classList.remove('active');
+        tabs.forEach((b,x)=>b.classList.toggle('active',x===startIdx));
+        const t=document.getElementById(ids[startIdx]);
+        t.classList.add('active');t.scrollTop=0;
+        cur=startIdx;
+        reveal(ids[startIdx]);
+    } else {reveal('home');}
+});
+
+window.addEventListener('hashchange',()=>{
+    const hash=location.hash.replace('#','');
+    const idx=ids.indexOf(hash);
+    if(idx>=0) goTo(idx);
 });
 
 function goTo(i,dir){
@@ -551,6 +566,7 @@ function goTo(i,dir){
         busy=false;
     }
     cur=i;
+    history.replaceState(null,null,'#'+ids[i]);
 }
 
 function reveal(id){
