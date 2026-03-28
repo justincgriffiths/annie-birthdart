@@ -97,6 +97,14 @@
         .page-header h2 { font-family: 'Rye', Georgia, serif; font-size: clamp(1.5rem, 7vw, 2rem); color: var(--orange); }
         .page-header p { font-family: 'Caveat', cursive; font-size: 1.15rem; color: var(--cream-50); margin-top: 0.25rem; }
         .squiggle { display: block; width: 80px; height: 8px; margin: 0.75rem auto 0; }
+        .photo { width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); margin: 1.25rem 0; display: block; }
+        .photo-row { display: flex; gap: 0.5rem; margin: 1.25rem 0; }
+        .photo-row .photo { flex: 1; min-width: 0; object-fit: cover; height: 200px; margin: 0; }
+        .photo-row .photo:only-child { height: auto; }
+        .photo-caption { font-family: 'Caveat', cursive; font-size: 0.85rem; color: var(--cream-30); text-align: center; margin-top: -0.5rem; margin-bottom: 1rem; }
+        .photo-strip { display: flex; gap: 0.75rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0.5rem 0 1rem; scrollbar-width: none; }
+        .photo-strip::-webkit-scrollbar { display: none; }
+        .photo-strip .photo { flex: 0 0 70%; scroll-snap-align: center; height: auto; margin: 0; }
 
         /* ===== HOME ===== */
         #home {
@@ -280,6 +288,12 @@
             </div>
             <p class="hero-player-hint si">&#9654; press play</p>
             <p class="swipe-hint si">swipe or tap to explore, n'at</p>
+            <div class="photo-strip si" style="margin-top:1.5rem">
+                <img src="images/hero-dance.jpg" alt="Annie on the dance floor" class="photo" loading="lazy">
+                <img src="images/hiking.jpg" alt="Hiking adventure" class="photo" loading="lazy">
+                <img src="images/birthday-cake.jpg" alt="Birthday cake" class="photo" loading="lazy">
+                <img src="images/beach.jpg" alt="Beach day" class="photo" loading="lazy">
+            </div>
         </div>
     </section>
 
@@ -299,6 +313,10 @@
                     <h3>Sunday</h3>
                     <div class="setlist-item"><span class="setlist-time">Morning</span><span class="setlist-event">The Birthdart Breakfast</span></div>
                 </div>
+            </div>
+            <div class="photo-row si" style="margin-top:2rem">
+                <img src="images/party-annie.jpg" alt="Party vibes" class="photo" loading="lazy">
+                <img src="images/dinner.jpg" alt="Dinner time" class="photo" loading="lazy">
             </div>
         </div>
     </section>
@@ -329,6 +347,8 @@
                 </div>
                 <div class="menu-ornament">&starf; &starf; &starf;</div>
             </div>
+            <img src="images/baking.jpg" alt="Baking with the little one" class="photo si" style="margin-top:1.5rem" loading="lazy">
+            <p class="photo-caption si">head chef</p>
         </div>
     </section>
 
@@ -369,6 +389,10 @@
                     <div class="college-label">All 51 Publications</div>
                 </div>
                 <div id="pub-list"></div>
+                <div class="photo-row" style="margin-top:1.5rem">
+                    <img src="images/fancy-coat.jpg" alt="City style" class="photo" loading="lazy">
+                    <img src="images/city-hall.jpg" alt="City Hall" class="photo" loading="lazy">
+                </div>
             </div>
 
             <!-- COLLEGE ANNIE -->
@@ -409,6 +433,13 @@
                 <div class="fake-pub"><span class="pub-title">Environmental Racism in the Distribution of Party Invitations</span><span class="pub-journal">PNAS (Party Natl Acad Sci), 2023</span></div>
                 <div class="fake-pub"><span class="pub-title">Eggs On Plate: A Systematic Review of Breakfast Preferences Among Snake Enthusiasts</span><span class="pub-journal">Reptile Brunch Q, 2022</span></div>
                 <div class="fake-pub"><span class="pub-title">Yinz Don't Even Know: Regional Identity Persistence Among Displaced Natrona Heights Natives</span><span class="pub-journal">J Pittsburgh Stud, 2025</span></div>
+                <div class="photo-strip" style="margin-top:1.5rem">
+                    <img src="images/protest.jpg" alt="Making her voice heard" class="photo" loading="lazy">
+                    <img src="images/college-party.jpg" alt="College days" class="photo" loading="lazy">
+                    <img src="images/college-friends.jpg" alt="The crew" class="photo" loading="lazy">
+                    <img src="images/halloween.jpg" alt="Halloween" class="photo" loading="lazy">
+                    <img src="images/new-mom.jpg" alt="New mom life" class="photo" loading="lazy">
+                </div>
                 <p style="text-align:center;font-size:0.6rem;color:var(--cream-30);margin-top:3rem;font-style:italic;opacity:0.6">RIP Roo, best girl in the world</p>
             </div>
         </div>
