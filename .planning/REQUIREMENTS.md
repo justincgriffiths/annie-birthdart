@@ -18,8 +18,8 @@
 ### File Architecture
 
 - [ ] **ARCH-01**: Split `index.html` into separate files: `css/style.css`, `js/app.js`, `js/publications.js`
-- [ ] **ARCH-02**: Tab navigation refactored from index-based to ID-based (`data-page="photos"` not `data-page="6"`)
-- [ ] **ARCH-03**: New tabs/sections can be added without modifying core JS logic
+- [x] **ARCH-02**: Tab navigation refactored from index-based to ID-based (`data-page="photos"` not `data-page="6"`)
+- [x] **ARCH-03**: New tabs/sections can be added without modifying core JS logic
 
 ### Photo Gallery
 
@@ -84,8 +84,8 @@
 | CICD-06 | Phase 1 | Pending |
 | CICD-07 | Phase 1 | Pending |
 | ARCH-01 | Phase 2 | Pending |
-| ARCH-02 | Phase 2 | Pending |
-| ARCH-03 | Phase 2 | Pending |
+| ARCH-02 | Phase 2 | Complete |
+| ARCH-03 | Phase 2 | Complete |
 | META-01 | Phase 2 | Complete |
 | META-02 | Phase 2 | Complete |
 | GALL-01 | Phase 3 | Pending |
