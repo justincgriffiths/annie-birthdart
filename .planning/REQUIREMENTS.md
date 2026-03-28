@@ -40,8 +40,8 @@
 
 ### Quick Wins
 
-- [ ] **META-01**: `og:image` meta tag for link sharing previews
-- [ ] **META-02**: ARIA roles on navigation elements
+- [x] **META-01**: `og:image` meta tag for link sharing previews
+- [x] **META-02**: ARIA roles on navigation elements
 
 ## v2 Requirements
 
@@ -86,8 +86,8 @@
 | ARCH-01 | Phase 2 | Pending |
 | ARCH-02 | Phase 2 | Pending |
 | ARCH-03 | Phase 2 | Pending |
-| META-01 | Phase 2 | Pending |
-| META-02 | Phase 2 | Pending |
+| META-01 | Phase 2 | Complete |
+| META-02 | Phase 2 | Complete |
 | GALL-01 | Phase 3 | Pending |
 | GALL-02 | Phase 3 | Pending |
 | GALL-03 | Phase 3 | Pending |
