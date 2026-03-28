@@ -22,12 +22,14 @@ test.describe('Page structure', () => {
     }
   });
 
-  test('nav tab data-page indices match section order', async ({ page }) => {
+  test('nav tab data-page values match section IDs', async ({ page }) => {
     const tabs = page.locator('.tab');
+    const sections = page.locator('.page');
     const count = await tabs.count();
     for (let i = 0; i < count; i++) {
       const dataPage = await tabs.nth(i).getAttribute('data-page');
-      expect(Number(dataPage)).toBe(i);
+      const sectionId = await sections.nth(i).getAttribute('id');
+      expect(dataPage).toBe(sectionId);
     }
   });
 
