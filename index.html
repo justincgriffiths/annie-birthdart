@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Annie's Birthdart Bash</title>
     <meta name="description" content="A birthday weekend celebration">
-    <meta name="theme-color" content="#12100d">
+    <meta name="theme-color" content="#050505">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta property="og:title" content="Annie's Birthdart Bash">
@@ -16,21 +16,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Rye&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Caveat:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #1a1510;
-            --bg-card: #262019;
-            --bg-border: #3a3228;
-            --cream: #f0dfc0;
-            --cream-50: rgba(240,223,192,0.5);
-            --cream-30: rgba(240,223,192,0.3);
-            --orange: #e87a2c;
-            --orange-bg: rgba(232,122,44,0.12);
-            --gold: #c4a04e;
+            --bg: #0a0a0a;
+            --bg-card: #141414;
+            --bg-border: #2a2a2a;
+            --cream: #f0e6d0;
+            --cream-50: rgba(240,230,208,0.5);
+            --cream-30: rgba(240,230,208,0.3);
+            --orange: #ffb81c;
+            --orange-bg: rgba(255,184,28,0.12);
+            --gold: #d4a843;
             --green: #3d7a5a;
             --green-bright: #4a9a6a;
-            --purple: #6b4c7a;
+            --purple: #888888;
             --coral: #c94530;
-            --reveal-bg: #1e2e22;
-            --nav-bg: #12100d;
+            --reveal-bg: #0f1a14;
+            --nav-bg: #050505;
             --nav-h: 48px;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -72,7 +72,7 @@
 
         /* ===== APP SHELL ===== */
         .app {
-            position: fixed; top: var(--nav-h); bottom: 0; left: 0; right: 0;
+            position: fixed; top: var(--nav-h); bottom: 82px; left: 0; right: 0;
             overflow: hidden;
         }
         .page {
@@ -101,15 +101,15 @@
         /* ===== HOME ===== */
         #home {
             justify-content: center; text-align: center;
-            background: radial-gradient(ellipse at 50% 30%, rgba(232,122,44,0.06) 0%, transparent 60%),
-                        radial-gradient(ellipse at 30% 70%, rgba(107,76,122,0.04) 0%, transparent 50%), var(--bg);
+            background: radial-gradient(ellipse at 50% 30%, rgba(255,184,28,0.06) 0%, transparent 60%),
+                        radial-gradient(ellipse at 30% 70%, rgba(136,136,136,0.04) 0%, transparent 50%), var(--bg);
         }
-        .hero-snake-svg { width: 150px; max-width: 42vw; margin: 0 auto 1.25rem; filter: drop-shadow(0 2px 8px rgba(232,122,44,0.25)); }
+        .hero-snake-svg { width: 150px; max-width: 42vw; margin: 0 auto 1.25rem; filter: drop-shadow(0 2px 8px rgba(255,184,28,0.25)); }
         .snake-body { stroke-dasharray: 400; stroke-dashoffset: 400; }
         .snake-body.drawn { animation: drawSnake 1.8s cubic-bezier(0.4,0,0.2,1) forwards; }
         @keyframes drawSnake { to { stroke-dashoffset: 0; } }
         .hero-pre { font-family: 'Caveat', cursive; font-size: clamp(1.3rem, 4vw, 1.7rem); color: var(--cream-50); margin-bottom: 0.1rem; }
-        .hero-title { font-family: 'Rye', Georgia, serif; font-size: clamp(2.2rem, 10vw, 3.6rem); line-height: 1.05; background: linear-gradient(135deg, var(--orange), var(--gold) 40%, var(--green-bright) 80%, var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-title { font-family: 'Rye', Georgia, serif; font-size: clamp(2.2rem, 10vw, 3.6rem); line-height: 1.05; background: linear-gradient(135deg, var(--orange), var(--gold) 50%, var(--cream) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .hero-tagline { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 0.85rem; color: var(--cream-30); margin-top: 0.75rem; }
         .hero-player { width: 100%; max-width: 360px; margin: 1.25rem auto 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.35); }
         .hero-player iframe { display: block; width: 100%; border: none; }
@@ -144,10 +144,26 @@
         .menu-item-desc { font-style: italic; font-size: 0.82rem; color: var(--cream-30); margin-top: 0.1rem; line-height: 1.4; }
         .menu-rule { text-align: center; margin: 1rem 0; color: var(--bg-border); font-size: 1.5rem; letter-spacing: 0.5em; }
 
-        /* ===== VIBES ===== */
-        #vibes { background: var(--bg); }
-        .spotify-wrap { border-radius: 12px; overflow: hidden; margin-bottom: 2.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-        .spotify-wrap iframe { width: 100%; border: none; display: block; }
+        /* ===== PERSISTENT PLAYER ===== */
+        .player-bar {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            z-index: 1002;
+            background: var(--nav-bg);
+            border-top: 1px solid var(--bg-border);
+            padding: 0;
+            transition: transform 0.3s ease;
+        }
+        .player-bar iframe { width: 100%; border: none; display: block; }
+        .player-toggle {
+            position: absolute; top: -28px; right: 12px;
+            background: var(--nav-bg); border: 1px solid var(--bg-border);
+            border-bottom: none; border-radius: 8px 8px 0 0;
+            color: var(--cream-30); font-size: 0.65rem; padding: 4px 10px;
+            cursor: pointer; font-family: 'DM Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .player-bar.collapsed { transform: translateY(100%); }
+        .player-bar.collapsed .player-toggle { top: -28px; transform: translateY(-100%); position: fixed; bottom: 0; right: 12px; border-bottom: none; border-radius: 8px 8px 0 0; }
 
         /* ===== PUBLICATIONS ===== */
         #pubs { background: var(--bg); }
@@ -158,7 +174,7 @@
         .pub-bio strong { color: var(--cream); }
         .pub-year { font-family: 'Rye', Georgia, serif; font-size: 0.85rem; color: var(--gold); padding: 1.25rem 0 0.4rem; border-bottom: 1px solid var(--bg-border); margin-bottom: 0.5rem; }
         .pub-year:first-child { padding-top: 0; }
-        .pub-item { display: block; text-decoration: none; color: var(--cream); padding: 0.55rem 0; border-bottom: 1px solid rgba(58,50,40,0.4); transition: background 0.2s; border-radius: 4px; }
+        .pub-item { display: block; text-decoration: none; color: var(--cream); padding: 0.55rem 0; border-bottom: 1px solid rgba(42,42,42,0.4); transition: background 0.2s; border-radius: 4px; }
         .pub-item:active { background: var(--orange-bg); }
         .pub-title { display: block; font-size: 0.8rem; line-height: 1.35; }
         .pub-journal { display: block; font-size: 0.68rem; color: var(--orange); margin-top: 0.15rem; font-style: italic; }
@@ -175,7 +191,7 @@
         .college-label { font-family: 'Rye', Georgia, serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 0.2rem; }
         .college-val { font-size: 0.95rem; line-height: 1.4; }
         .college-val em { color: var(--cream-50); font-style: italic; font-size: 0.82rem; }
-        .fake-pub { padding: 0.5rem 0; border-bottom: 1px solid rgba(58,50,40,0.4); }
+        .fake-pub { padding: 0.5rem 0; border-bottom: 1px solid rgba(42,42,42,0.4); }
         .fake-pub .pub-title { font-size: 0.82rem; }
         .fake-pub .pub-journal { color: var(--purple); }
 
@@ -183,20 +199,37 @@
         #gift { background: radial-gradient(ellipse at 50% 60%, rgba(61,122,90,0.15) 0%, transparent 60%), linear-gradient(180deg, var(--reveal-bg), var(--bg)); }
         .gift-header { text-align: center; margin-bottom: 0.5rem; }
         .gift-header h2 { font-family: 'Rye', Georgia, serif; font-size: clamp(1.5rem, 7vw, 2rem); color: var(--green-bright); }
-        .gift-lead { text-align: center; font-family: 'Caveat', cursive; font-size: 1.25rem; color: var(--cream-50); }
-        .gift-lead a { color: var(--coral); text-decoration: underline wavy; text-underline-offset: 3px; font-weight: 700; }
-        .expo-card { display: block; background: #faf6ee; border-radius: 16px; padding: 2rem 1.5rem 1.75rem; text-align: center; text-decoration: none; color: #2d2d2d; margin-top: 2rem; box-shadow: 0 8px 32px rgba(0,0,0,0.25); transition: transform 0.3s; }
+        .gift-lead { text-align: center; font-family: 'Caveat', cursive; font-size: 1.25rem; color: var(--cream-50); margin-bottom: 0.25rem; }
+        .gift-but { text-align: center; font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 1.5rem; color: var(--cream); margin: 0.75rem 0 1.5rem; }
+        .gift-reveal-btn {
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 14px 32px; border: 2px solid var(--green-bright); border-radius: 50px;
+            background: rgba(74,154,106,0.15); color: var(--cream);
+            font-family: 'Rye', Georgia, serif; font-size: 1rem;
+            cursor: pointer; transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .gift-reveal-btn:hover { background: rgba(74,154,106,0.3); transform: scale(1.05); box-shadow: 0 0 20px rgba(74,154,106,0.3); }
+        .gift-reveal-btn:active { transform: scale(0.97); }
+        .gift-reveal-btn-icon { font-size: 1.4rem; display: inline-block; animation: wiggle 1.5s ease-in-out infinite; }
+        @keyframes wiggle { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-8deg); } 75% { transform: rotate(8deg); } }
+        .gift-reveal-btn.revealed { display: none; }
+        .gift-reveal-panel { width: 100%; max-width: 440px; overflow: hidden; max-height: 0; opacity: 0; margin-top: 0; }
+        .gift-reveal-panel.open { margin-top: 1.5rem; }
+        .expo-card { display: block; background: #faf6ee; border-radius: 16px; padding: 2rem 1.5rem 1.75rem; text-align: center; text-decoration: none; color: #2d2d2d; box-shadow: 0 8px 32px rgba(0,0,0,0.25); transition: transform 0.3s; }
         .expo-card:active { transform: scale(0.98); }
         .expo-card img { max-width: 100%; height: auto; margin-bottom: 1.25rem; }
         .expo-date { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--green); }
-        .expo-location { font-size: 0.9rem; color: #777; margin-top: 0.2rem; }
+        .expo-location { font-size: 0.9rem; color: #888; margin-top: 0.2rem; }
         .expo-reveal { font-family: 'Rye', Georgia, serif; font-size: 1rem; color: var(--coral); margin-top: 1rem; }
+        .gift-coda { text-align: center; font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: var(--cream-30); margin-top: 1.5rem; font-style: italic; opacity: 0; }
 
         /* ===== ANIM ===== */
         .si { opacity: 0; transform: translateY(18px); }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
             .grain { display: none; } .si { opacity: 1; transform: none; } .snake-body { stroke-dashoffset: 0 !important; }
+            .gift-reveal-btn-icon { animation: none; } .gift-reveal-panel { max-height: none; opacity: 1; } .gift-coda { opacity: 1; }
         }
 
         /* ===== RESPONSIVE ===== */
@@ -217,9 +250,8 @@
     <button class="tab active" data-page="0"><span class="tab-icon">&#x1F40D;</span><span class="tab-label">Home</span></button>
     <button class="tab" data-page="1"><span class="tab-icon">&#x1F37E;</span><span class="tab-label">Weekend</span></button>
     <button class="tab" data-page="2"><span class="tab-icon">&#x1F373;</span><span class="tab-label">Menu</span></button>
-    <button class="tab" data-page="3"><span class="tab-icon">&#x1F3B5;</span><span class="tab-label">Vibes</span></button>
-    <button class="tab" data-page="4"><span class="tab-icon">&#x1F4DA;</span><span class="tab-label">R&eacute;sum&eacute;</span></button>
-    <button class="tab" data-page="5"><span class="tab-icon">&#x1F381;</span><span class="tab-label">Gift</span></button>
+    <button class="tab" data-page="3"><span class="tab-icon">&#x1F4DA;</span><span class="tab-label">R&eacute;sum&eacute;</span></button>
+    <button class="tab" data-page="4"><span class="tab-icon">&#x1F381;</span><span class="tab-label">Gift</span></button>
 </nav>
 
 <main class="app">
@@ -235,19 +267,19 @@
             </svg>
             <p class="hero-pre si">Annie's</p>
             <h1 class="hero-title si">Birthdart<br>Bash</h1>
-            <p class="hero-tagline si">"I eat bad days for breakfast"</p>
+            <p class="hero-tagline si">"I eat bad days for breakfast" &mdash; fueled by Iron City &amp; Natrona Heights grit</p>
             <div class="hero-player si">
                 <iframe src="https://open.spotify.com/embed/track/6fJmlHagoYGxAi3Xilczuo?utm_source=generator&theme=0" height="80" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>
             </div>
             <p class="hero-player-hint si">&#9654; press play</p>
-            <p class="swipe-hint si">swipe or tap to explore</p>
+            <p class="swipe-hint si">swipe or tap to explore, n'at</p>
         </div>
     </section>
 
     <!-- WEEKEND -->
     <section class="page" id="weekend">
         <div class="page-content">
-            <div class="page-header si"><h2>The Weekend</h2><p>Here's what's going down. All activities and times subject to vibes.</p></div>
+            <div class="page-header si"><h2>The Weekend</h2><p>Here's what's goin' dahn. Take the vibes, leave the details. All activities and times are subject to change.</p></div>
             <div class="setlist">
                 <div class="setlist-day si">
                     <h3>Saturday</h3>
@@ -273,7 +305,7 @@
                 <div class="menu-section">
                     <h3 class="menu-section-title">Nosh</h3>
                     <div class="menu-item"><div class="menu-item-name">This S**t is Bananas</div><div class="menu-item-desc">Mochi banana pancakes with maple syrup &amp; fresh berries</div></div>
-                    <div class="menu-item"><div class="menu-item-name">Eggs On Plate</div><div class="menu-item-desc">Eggs the way you like 'em with homefries &amp; uncured local bacon</div></div>
+                    <div class="menu-item"><div class="menu-item-name">Eggs On Plate</div><div class="menu-item-desc">Eggs the way you like 'em with homefries &amp; local hickory smoked bacon</div></div>
                     <div class="menu-item"><div class="menu-item-name">You Oat to Yo(gurt)</div><div class="menu-item-desc">Yogurt &amp; muesli with fresh berries</div></div>
                 </div>
                 <div class="menu-rule">&middot;&middot;&middot;</div>
@@ -289,16 +321,6 @@
                     <div class="menu-item"><div class="menu-item-name">Cake, Cake, Cake</div><div class="menu-item-desc">More cake, more better.</div></div>
                 </div>
                 <div class="menu-ornament">&starf; &starf; &starf;</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- VIBES -->
-    <section class="page" id="vibes">
-        <div class="page-content">
-            <div class="page-header si"><h2>The Vibes</h2><p>The official playlist</p></div>
-            <div class="spotify-wrap si">
-                <iframe src="https://open.spotify.com/embed/playlist/33kGXY5y48zLQULXEXdxOp?utm_source=generator&theme=0" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
         </div>
     </section>
@@ -344,7 +366,7 @@
 
             <!-- COLLEGE ANNIE -->
             <div class="resume-mode" id="resume-college">
-                <p class="pub-bio"><strong>Annie &ldquo;Birthdart&rdquo; Nigra</strong><br>Professional Birthday Haver<br>Rosie's House, Saturday at 4 PM<br>Desired Bedtime: 10 PM</p>
+                <p class="pub-bio"><strong>Annie &ldquo;Birthdart&rdquo; Nigra</strong><br>Professional Birthday Haver &bull; Yinzer in Exile<br>Rosie's House, Saturday at 4 PM<br>Desired Bedtime: 10 PM</p>
                 <div class="pub-stats">
                     <div class="pub-stat"><strong>&infin;</strong>Vibes</div>
                     <div class="pub-stat"><strong>2</strong>Mama of 2</div>
@@ -356,19 +378,19 @@
                 </div>
                 <div class="college-item">
                     <div class="college-label">Hometown</div>
-                    <div class="college-val">Natrona Heights, PA &rarr; NYC<br><em>Rachel Carson Trail enthusiast</em></div>
+                    <div class="college-val">Natrona Heights, PA &rarr; NYC<br><em>Rachel Carson Trail enthusiast &bull; Crossed all 446 bridges</em></div>
                 </div>
                 <div class="college-item">
                     <div class="college-label">Expertise</div>
-                    <div class="college-val">Champagne &bull; Chimineas &bull; Being Bad at Accepting Gifts &bull; Snake Identification &bull; Running in Fancy Socks</div>
+                    <div class="college-val">Champagne &bull; Chimineas &bull; Being Bad at Accepting Gifts &bull; Snake Identification &bull; Running in Fancy Socks &bull; Pierogi Diplomacy</div>
                 </div>
                 <div class="college-item">
                     <div class="college-label">Hobbies</div>
-                    <div class="college-val">Trail running &bull; Gravel cycling &bull; Hiking &bull; NYC parks &bull; Telling people she hates gifts</div>
+                    <div class="college-val">Trail running &bull; Gravel cycling &bull; Hiking &bull; NYC parks &bull; Telling people she hates gifts &bull; Defending Pittsburgh against Philly slander</div>
                 </div>
                 <div class="college-item">
                     <div class="college-label">Known For</div>
-                    <div class="college-val">&ldquo;I eat bad days for breakfast&rdquo;<br>&ldquo;More cake, more better&rdquo;<br>Leaving every party by 10 PM</div>
+                    <div class="college-val">&ldquo;I eat bad days for breakfast&rdquo;<br>&ldquo;More cake, more better&rdquo;<br>&ldquo;Yinz don't even know&rdquo;<br>Leaving every party by 10 PM</div>
                 </div>
                 <div class="college-item" style="margin-bottom:0.5rem">
                     <div class="college-label">Selected Publications</div>
@@ -379,6 +401,7 @@
                 <div class="fake-pub"><span class="pub-title">Beanz A Make Her Dance: Coffee Consumption and Bold Behavior in Birthdart Populations</span><span class="pub-journal">J Caffeine Stud, 2024</span></div>
                 <div class="fake-pub"><span class="pub-title">Environmental Racism in the Distribution of Party Invitations</span><span class="pub-journal">PNAS (Party Natl Acad Sci), 2023</span></div>
                 <div class="fake-pub"><span class="pub-title">Eggs On Plate: A Systematic Review of Breakfast Preferences Among Snake Enthusiasts</span><span class="pub-journal">Reptile Brunch Q, 2022</span></div>
+                <div class="fake-pub"><span class="pub-title">Yinz Don't Even Know: Regional Identity Persistence Among Displaced Natrona Heights Natives</span><span class="pub-journal">J Pittsburgh Stud, 2025</span></div>
                 <p style="text-align:center;font-size:0.6rem;color:var(--cream-30);margin-top:3rem;font-style:italic;opacity:0.6">RIP Roo, best girl in the world</p>
             </div>
         </div>
@@ -386,19 +409,35 @@
 
     <!-- GIFT -->
     <section class="page" id="gift">
-        <div class="page-content">
+        <div class="page-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%">
             <div class="gift-header si"><h2>One More Thing&hellip;</h2></div>
-            <p class="gift-lead si">You hate gifts. We know.<br>But <a href="https://www.youtube.com/watch?v=i6lH7cUeaQg&t=5s" target="_blank" rel="noopener noreferrer">too bad</a>.</p>
-            <a href="https://reptileexpo.com/all-shows/white-plains-expo/" target="_blank" rel="noopener noreferrer" class="expo-card si">
-                <img src="reptile-expo.png" alt="Reptile Expo" width="571" height="116">
-                <div class="expo-date">Sunday, April 12</div>
-                <div class="expo-location">White Plains, NY &bull; 9 AM &ndash; 4 PM</div>
-                <div class="expo-reveal">You're going to the Reptile Expo to see SNAKES (if you're available and want to)!</div>
-            </a>
+            <p class="gift-lead si">You hate gifts. We know.</p>
+            <p class="gift-but si">But&hellip;</p>
+
+            <button class="gift-reveal-btn si" id="gift-reveal-btn" aria-expanded="false" aria-controls="gift-reveal-panel">
+                <span class="gift-reveal-btn-icon">&#x1F381;</span>
+                <span class="gift-reveal-btn-text">Unwrap It</span>
+            </button>
+
+            <div class="gift-reveal-panel" id="gift-reveal-panel" aria-hidden="true">
+                <a href="https://reptileexpo.com/all-shows/white-plains-expo/" target="_blank" rel="noopener noreferrer" class="expo-card">
+                    <img src="reptile-expo.png" alt="Reptile Expo" width="571" height="116">
+                    <div class="expo-date">Sunday, April 12</div>
+                    <div class="expo-location">White Plains, NY &bull; 9 AM &ndash; 4 PM</div>
+                    <div class="expo-reveal">You're going to the Reptile Expo to see SNAKES!</div>
+                </a>
+            </div>
+
+            <p class="gift-coda" id="gift-coda">if you don't have other plans and feel like it. Idk, do you.</p>
         </div>
     </section>
 
 </main>
+
+<div class="player-bar" id="player-bar">
+    <button class="player-toggle" id="player-toggle">&#x1F3B5; playlist</button>
+    <iframe src="https://open.spotify.com/embed/playlist/33kGXY5y48zLQULXEXdxOp?utm_source=generator&theme=0" height="80" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
 <script>
@@ -472,7 +511,7 @@ function renderPubs(){
 renderPubs();
 
 /* Nav + page logic */
-const ids=['home','weekend','menu','vibes','pubs','gift'];
+const ids=['home','weekend','menu','pubs','gift'];
 const tabs=document.querySelectorAll('.tab');
 const appEl=document.querySelector('.app');
 let cur=0,busy=false;
@@ -531,6 +570,37 @@ appEl.addEventListener('touchend',e=>{
 document.addEventListener('keydown',e=>{
     if(e.key==='ArrowRight')goTo(cur+1,1);
     if(e.key==='ArrowLeft')goTo(cur-1,-1);
+});
+
+/* Player bar toggle */
+const pb=document.getElementById('player-bar'),pt=document.getElementById('player-toggle');
+if(pb&&pt) pt.addEventListener('click',()=>{
+    const c=pb.classList.toggle('collapsed');
+    document.querySelector('.app').style.bottom=c?'0':'82px';
+    pt.innerHTML=c?'&#x1F3B5; show playlist':'&#x1F3B5; playlist';
+});
+
+/* Gift reveal */
+const giftBtn=document.getElementById('gift-reveal-btn');
+const giftPanel=document.getElementById('gift-reveal-panel');
+const giftCoda=document.getElementById('gift-coda');
+if(giftBtn&&giftPanel) giftBtn.addEventListener('click',function(){
+    giftBtn.classList.add('revealed');
+    giftBtn.setAttribute('aria-expanded','true');
+    giftPanel.setAttribute('aria-hidden','false');
+    const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(typeof gsap!=='undefined'&&!prefersReduced){
+        giftPanel.classList.add('open');
+        gsap.to(giftPanel,{maxHeight:800,opacity:1,duration:0.6,ease:'power2.out',onComplete(){
+            giftPanel.style.maxHeight='none';
+            if(giftCoda) gsap.to(giftCoda,{opacity:1,duration:0.5,delay:0.3,ease:'power2.out'});
+        }});
+    } else {
+        giftPanel.classList.add('open');
+        giftPanel.style.maxHeight='none';
+        giftPanel.style.opacity='1';
+        if(giftCoda) giftCoda.style.opacity='1';
+    }
 });
 })();
 </script>
