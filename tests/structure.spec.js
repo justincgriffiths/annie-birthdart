@@ -45,4 +45,35 @@ test.describe('Page structure', () => {
     await page.waitForTimeout(1000);
     expect(errors).toEqual([]);
   });
+
+  test('tab count matches section count (extensibility check)', async ({ page }) => {
+    const tabCount = await page.locator('.tab').count();
+    const sectionCount = await page.locator('.page').count();
+    expect(tabCount).toBe(sectionCount);
+    expect(tabCount).toBeGreaterThanOrEqual(5);
+  });
+
+  test('ARIA tab attributes are correctly wired', async ({ page }) => {
+    const nav = page.locator('.nav-bar');
+    await expect(nav).toHaveAttribute('role', 'tablist');
+
+    const tabs = page.locator('.tab');
+    const count = await tabs.count();
+    for (let i = 0; i < count; i++) {
+      const tab = tabs.nth(i);
+      await expect(tab).toHaveAttribute('role', 'tab');
+      const dataPage = await tab.getAttribute('data-page');
+      await expect(tab).toHaveAttribute('id', 'tab-' + dataPage);
+      await expect(tab).toHaveAttribute('aria-controls', dataPage);
+    }
+
+    const sections = page.locator('.page');
+    const sectionCount = await sections.count();
+    for (let i = 0; i < sectionCount; i++) {
+      const section = sections.nth(i);
+      await expect(section).toHaveAttribute('role', 'tabpanel');
+      const id = await section.getAttribute('id');
+      await expect(section).toHaveAttribute('aria-labelledby', 'tab-' + id);
+    }
+  });
 });

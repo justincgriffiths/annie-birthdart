@@ -22,7 +22,12 @@ function goTo(targetId, dir) {
     const f = pages.get(cur);
     const t = pages.get(targetId);
 
-    tabs.forEach(b => b.classList.toggle('active', b.dataset.page === targetId));
+    tabs.forEach(b => {
+        const isActive = b.dataset.page === targetId;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-selected', String(isActive));
+        b.setAttribute('tabindex', isActive ? '0' : '-1');
+    });
     t.querySelectorAll('.si').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(18px)';
@@ -36,7 +41,7 @@ function goTo(targetId, dir) {
                 t.classList.add('active'); t.scrollTop = 0;
                 gsap.fromTo(t, { opacity: 0, x: 36 * dir }, {
                     opacity: 1, x: 0, duration: 0.28, ease: 'power2.out',
-                    onComplete() { busy = false; reveal(targetId); }
+                    onComplete() { busy = false; reveal(targetId); t.focus({ preventScroll: true }); }
                 });
             }
         });
@@ -44,6 +49,7 @@ function goTo(targetId, dir) {
         f.classList.remove('active'); t.classList.add('active'); t.scrollTop = 0;
         t.querySelectorAll('.si').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
         busy = false;
+        t.focus({ preventScroll: true });
     }
 
     cur = targetId;
@@ -73,7 +79,12 @@ window.addEventListener('load', () => {
     const hash = location.hash.replace('#', '');
     if (hash && ids.includes(hash) && hash !== ids[0]) {
         pages.get(ids[0]).classList.remove('active');
-        tabs.forEach(b => b.classList.toggle('active', b.dataset.page === hash));
+        tabs.forEach(b => {
+            const isActive = b.dataset.page === hash;
+            b.classList.toggle('active', isActive);
+            b.setAttribute('aria-selected', String(isActive));
+            b.setAttribute('tabindex', isActive ? '0' : '-1');
+        });
         const t = pages.get(hash);
         t.classList.add('active'); t.scrollTop = 0;
         cur = hash;
