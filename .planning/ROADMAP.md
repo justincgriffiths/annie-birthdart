@@ -25,7 +25,7 @@
 **Plans:** 3 plans
 
 Plans:
-- [ ] 02-a-PLAN.md -- Extract CSS/JS into separate files, modernize tab system to DOM-driven IDs
+- [x] 02-a-PLAN.md -- Extract CSS/JS into separate files, modernize tab system to DOM-driven IDs
 - [ ] 02-b-PLAN.md -- Add OG meta tags for social sharing and ARIA tab pattern for accessibility
 - [ ] 02-c-PLAN.md -- Update tests for new tab scheme, add extensibility/ARIA tests, final verification
 
