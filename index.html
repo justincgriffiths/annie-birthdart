@@ -169,6 +169,22 @@
         .pub-title { display: block; font-size: 0.8rem; line-height: 1.35; }
         .pub-journal { display: block; font-size: 0.68rem; color: var(--orange); margin-top: 0.15rem; font-style: italic; }
 
+        /* Resume toggle */
+        .resume-toggle { position: sticky; top: 0; z-index: 10; background: var(--bg); display: flex; justify-content: center; gap: 0; margin-bottom: 1.5rem; padding: 0.5rem 0 0.75rem; }
+        .toggle-btn { flex: 1; max-width: 160px; padding: 9px 0; border: 1px solid var(--bg-border); background: none; color: var(--cream-30); font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.25s; -webkit-tap-highlight-color: transparent; text-transform: uppercase; letter-spacing: 0.06em; }
+        .toggle-btn:first-child { border-radius: 20px 0 0 20px; }
+        .toggle-btn:last-child { border-radius: 0 20px 20px 0; border-left: none; }
+        .toggle-btn.active { background: var(--orange); color: var(--bg); border-color: var(--orange); }
+        .resume-mode { display: none; }
+        .resume-mode.active { display: block; }
+        .college-item { margin-bottom: 1rem; }
+        .college-label { font-family: 'Rye', Georgia, serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 0.2rem; }
+        .college-val { font-size: 0.95rem; line-height: 1.4; }
+        .college-val em { color: var(--cream-50); font-style: italic; font-size: 0.82rem; }
+        .fake-pub { padding: 0.5rem 0; border-bottom: 1px solid rgba(58,50,40,0.4); }
+        .fake-pub .pub-title { font-size: 0.82rem; }
+        .fake-pub .pub-journal { color: var(--purple); }
+
         /* ===== GIFT ===== */
         #gift { background: radial-gradient(ellipse at 50% 60%, rgba(61,122,90,0.15) 0%, transparent 60%), linear-gradient(180deg, var(--reveal-bg), var(--bg)); }
         .gift-header { text-align: center; margin-bottom: 0.5rem; }
@@ -300,20 +316,83 @@
         </div>
     </section>
 
-    <!-- PUBLICATIONS -->
+    <!-- PUBLICATIONS / RÉSUMÉ -->
     <section class="page" id="pubs">
         <div class="page-content">
             <div class="page-header si">
                 <h2>The R&eacute;sum&eacute;</h2>
                 <p>She won't brag, so we will.</p>
             </div>
-            <p class="pub-bio si"><strong>Dr. Anne E. Nigra</strong><br>Assistant Professor, Environmental Health Sciences<br>Columbia University Mailman School of Public Health<br>NIH Director's Early Independence Award</p>
-            <div class="pub-stats si">
-                <div class="pub-stat"><strong>51</strong>Publications</div>
-                <div class="pub-stat"><strong>10+</strong>Years</div>
-                <div class="pub-stat"><strong>$2M</strong>NIH Award</div>
+
+            <div class="resume-toggle si">
+                <button class="toggle-btn active" data-mode="pro">Dr. Nigra</button>
+                <button class="toggle-btn" data-mode="college">College Annie</button>
             </div>
-            <div id="pub-list" class="si"></div>
+
+            <!-- DR. NIGRA -->
+            <div class="resume-mode active" id="resume-pro">
+                <p class="pub-bio"><strong>Anne E. Nigra, PhD, ScM</strong><br>Assistant Professor, Environmental Health Sciences<br>Columbia University Mailman School of Public Health<br>Leads the WATER EPI Lab</p>
+                <div class="pub-stats">
+                    <div class="pub-stat"><strong>51</strong>Publications</div>
+                    <div class="pub-stat"><strong>10+</strong>Years</div>
+                    <div class="pub-stat"><strong>$2M</strong>NIH Award</div>
+                </div>
+                <div class="college-item">
+                    <div class="college-label">Education</div>
+                    <div class="college-val">PhD &mdash; Columbia University<br>ScM &mdash; Johns Hopkins Bloomberg School of Public Health</div>
+                </div>
+                <div class="college-item">
+                    <div class="college-label">Research</div>
+                    <div class="college-val">Drinking water epidemiology &bull; Environmental justice &bull; Metal exposures &bull; Maternal &amp; infant health &bull; Climate &amp; incarceration</div>
+                </div>
+                <div class="college-item">
+                    <div class="college-label">Published In</div>
+                    <div class="college-val">Nature Medicine &bull; JAMA &bull; Lancet &bull; Circulation &bull; PNAS &bull; Nature Communications &bull; Diabetes Care</div>
+                </div>
+                <div class="college-item" style="margin-bottom:0.5rem">
+                    <div class="college-label">All 51 Publications</div>
+                </div>
+                <div id="pub-list"></div>
+            </div>
+
+            <!-- COLLEGE ANNIE -->
+            <div class="resume-mode" id="resume-college">
+                <p class="pub-bio"><strong>Annie &ldquo;Birthdart&rdquo; Nigra</strong><br>Professional Birthday Haver<br>Rosie's House, Saturday at 4 PM<br>Desired Bedtime: 10 PM</p>
+                <div class="pub-stats">
+                    <div class="pub-stat"><strong>&infin;</strong>Vibes</div>
+                    <div class="pub-stat"><strong>1</strong>Dog (Roo)</div>
+                    <div class="pub-stat"><strong>10p</strong>Bedtime</div>
+                </div>
+                <div class="college-item">
+                    <div class="college-label">Alma Mater</div>
+                    <div class="college-val">Dartmouth College<br><em>Hence &ldquo;Birthdart&rdquo;</em></div>
+                </div>
+                <div class="college-item">
+                    <div class="college-label">Hometown</div>
+                    <div class="college-val">Natrona Heights, PA &rarr; NYC<br><em>Rachel Carson Trail enthusiast</em></div>
+                </div>
+                <div class="college-item">
+                    <div class="college-label">Expertise</div>
+                    <div class="college-val">Champagne &bull; Chimineas &bull; Being Bad at Accepting Gifts &bull; Snake Identification &bull; Running in Fancy Socks</div>
+                </div>
+                <div class="college-item">
+                    <div class="college-label">Hobbies</div>
+                    <div class="college-val">Trail running &bull; Gravel cycling &bull; Hiking &bull; NYC parks &bull; Telling people she hates gifts &bull; Being a dog mom to Roo</div>
+                </div>
+                <div class="college-item">
+                    <div class="college-label">Known For</div>
+                    <div class="college-val">&ldquo;I eat bad days for breakfast&rdquo;<br>&ldquo;More cake, more better&rdquo;<br>Leaving every party by 10 PM</div>
+                </div>
+                <div class="college-item" style="margin-bottom:0.5rem">
+                    <div class="college-label">Selected Publications</div>
+                </div>
+                <div class="fake-pub"><span class="pub-title">This S**t is Bananas: A Longitudinal Study of Mochi Pancake Consumption</span><span class="pub-journal">J Breakfast Sci, 2026</span></div>
+                <div class="fake-pub"><span class="pub-title">We Listen and We Don't Judge: An Observational Study of Mimosa Intake at Brunch</span><span class="pub-journal">Ann Brunch Med, ongoing</span></div>
+                <div class="fake-pub"><span class="pub-title">More Cake, More Better: A Meta-Analysis</span><span class="pub-journal">Lancet Pastry, 2025</span></div>
+                <div class="fake-pub"><span class="pub-title">Beanz A Make Her Dance: Coffee Consumption and Bold Behavior in Birthdart Populations</span><span class="pub-journal">J Caffeine Stud, 2024</span></div>
+                <div class="fake-pub"><span class="pub-title">Environmental Racism in the Distribution of Party Invitations</span><span class="pub-journal">PNAS (Party Natl Acad Sci), 2023</span></div>
+                <div class="fake-pub"><span class="pub-title">Eggs On Plate: A Systematic Review of Breakfast Preferences Among Snake Enthusiasts</span><span class="pub-journal">Reptile Brunch Q, 2022</span></div>
+            </div>
         </div>
     </section>
 
@@ -442,6 +521,17 @@ function reveal(id){
 }
 
 tabs.forEach(t=>t.addEventListener('click',()=>goTo(+t.dataset.page)));
+
+/* Resume toggle */
+document.querySelectorAll('.toggle-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        const m=btn.dataset.mode;
+        document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('resume-pro').classList.toggle('active',m==='pro');
+        document.getElementById('resume-college').classList.toggle('active',m==='college');
+    });
+});
 
 let sx=0,sy=0;
 appEl.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
