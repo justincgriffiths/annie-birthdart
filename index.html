@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Annie's Birthdart Bash</title>
     <meta name="description" content="A birthday weekend celebration">
-    <meta name="theme-color" content="#1a1510">
+    <meta name="theme-color" content="#12100d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta property="og:title" content="Annie's Birthdart Bash">
@@ -17,14 +17,13 @@
     <style>
         :root {
             --bg: #1a1510;
-            --bg-warm: #211c15;
             --bg-card: #262019;
             --bg-border: #3a3228;
             --cream: #f0dfc0;
             --cream-50: rgba(240,223,192,0.5);
             --cream-30: rgba(240,223,192,0.3);
             --orange: #e87a2c;
-            --orange-dim: rgba(232,122,44,0.15);
+            --orange-bg: rgba(232,122,44,0.12);
             --gold: #c4a04e;
             --green: #3d7a5a;
             --green-bright: #4a9a6a;
@@ -32,6 +31,7 @@
             --coral: #c94530;
             --reveal-bg: #1e2e22;
             --nav-bg: #12100d;
+            --nav-h: 48px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,12 +46,64 @@
         }
 
         /* ================================================
+           TOP NAV — pill tabs
+           ================================================ */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-h);
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--bg-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            z-index: 1001;
+            padding: 0 12px;
+            padding-top: env(safe-area-inset-top, 0px);
+        }
+
+        .tab {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 7px 10px;
+            border-radius: 20px;
+            background: none;
+            border: none;
+            color: var(--cream-30);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: background 0.25s, color 0.25s;
+            -webkit-tap-highlight-color: transparent;
+            white-space: nowrap;
+        }
+
+        .tab-icon { font-size: 1.15rem; line-height: 1; }
+        .tab-label { display: none; }
+
+        .tab.active {
+            background: var(--orange-bg);
+            color: var(--orange);
+        }
+
+        .tab.active .tab-label { display: inline; }
+
+        /* ================================================
            APP SHELL
            ================================================ */
         .app {
-            position: relative;
-            height: calc(100vh - 68px);
-            height: calc(100svh - 68px);
+            position: fixed;
+            top: var(--nav-h);
+            bottom: 0;
+            left: 0;
+            right: 0;
             overflow: hidden;
         }
 
@@ -61,16 +113,17 @@
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             opacity: 0;
-            visibility: hidden;
+            pointer-events: none;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2rem 1.5rem 2.5rem;
+            padding: 2rem 1.5rem 3rem;
         }
 
         .page.active {
             opacity: 1;
-            visibility: visible;
+            pointer-events: auto;
+            z-index: 1;
         }
 
         .page-content {
@@ -79,7 +132,7 @@
         }
 
         /* ================================================
-           FILM GRAIN OVERLAY
+           FILM GRAIN
            ================================================ */
         .grain {
             position: fixed;
@@ -94,60 +147,7 @@
         }
 
         /* ================================================
-           TAB BAR
-           ================================================ */
-        .tab-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 68px;
-            background: var(--nav-bg);
-            border-top: 1px solid var(--bg-border);
-            display: flex;
-            align-items: stretch;
-            z-index: 1000;
-            padding-bottom: env(safe-area-inset-bottom, 0px);
-        }
-
-        .tab {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 3px;
-            background: none;
-            border: none;
-            color: var(--cream-30);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.6rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-            transition: color 0.25s;
-            position: relative;
-        }
-
-        .tab.active { color: var(--orange); }
-
-        .tab.active::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 25%;
-            right: 25%;
-            height: 2px;
-            background: var(--orange);
-            border-radius: 0 0 2px 2px;
-        }
-
-        .tab-icon { font-size: 1.3rem; line-height: 1; }
-
-        /* ================================================
-           SHARED TYPOGRAPHY
+           SHARED
            ================================================ */
         .page-header {
             text-align: center;
@@ -181,15 +181,15 @@
             justify-content: center;
             text-align: center;
             background:
-                radial-gradient(ellipse at 50% 35%, rgba(232,122,44,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 30%, rgba(232,122,44,0.06) 0%, transparent 60%),
                 radial-gradient(ellipse at 30% 70%, rgba(107,76,122,0.04) 0%, transparent 50%),
                 var(--bg);
         }
 
         .hero-snake-svg {
-            width: 180px;
-            max-width: 50vw;
-            margin: 0 auto 2.5rem;
+            width: 160px;
+            max-width: 45vw;
+            margin: 0 auto 1.5rem;
             filter: drop-shadow(0 2px 8px rgba(232,122,44,0.25));
         }
 
@@ -208,41 +208,63 @@
 
         .hero-pre {
             font-family: 'Caveat', cursive;
-            font-size: clamp(1.6rem, 5vw, 2.2rem);
+            font-size: clamp(1.4rem, 4.5vw, 1.8rem);
             color: var(--cream-50);
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.15rem;
         }
 
         .hero-title {
             font-family: 'Rye', Georgia, serif;
-            font-size: clamp(2.6rem, 11vw, 4rem);
+            font-size: clamp(2.4rem, 10vw, 3.8rem);
             line-height: 1.05;
             background: linear-gradient(135deg, var(--orange) 0%, var(--gold) 40%, var(--green-bright) 80%, var(--purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            filter: drop-shadow(0 2px 12px rgba(232,122,44,0.15));
         }
 
         .hero-tagline {
             font-family: 'Playfair Display', Georgia, serif;
             font-style: italic;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--cream-30);
-            margin-top: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        /* Landing player */
+        .hero-player {
+            width: 100%;
+            max-width: 380px;
+            margin: 1.5rem auto 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+        }
+
+        .hero-player iframe {
+            display: block;
+            width: 100%;
+            border: none;
+        }
+
+        .hero-player-hint {
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            color: var(--cream-30);
+            margin-top: 0.75rem;
         }
 
         .swipe-hint {
-            margin-top: 3rem;
-            font-size: 0.75rem;
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
             color: var(--cream-30);
             letter-spacing: 0.05em;
             animation: pulse 2.5s ease-in-out infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.7; }
+            0%, 100% { opacity: 0.25; }
+            50% { opacity: 0.65; }
         }
 
         /* ================================================
@@ -378,7 +400,7 @@
         }
 
         /* ================================================
-           VIBES
+           VIBES — full playlist + movies
            ================================================ */
         #vibes { background: var(--bg); }
 
@@ -420,7 +442,6 @@
             transition: border-color 0.3s, transform 0.3s;
         }
 
-        .movie-card:hover,
         .movie-card:active {
             border-color: var(--gold);
             transform: translateY(-2px);
@@ -441,7 +462,7 @@
         }
 
         /* ================================================
-           GIFT / REVEAL
+           GIFT
            ================================================ */
         #gift {
             background:
@@ -462,11 +483,9 @@
 
         .gift-lead {
             text-align: center;
-            font-size: 1rem;
-            color: var(--cream-50);
-            margin-bottom: 0.5rem;
             font-family: 'Caveat', cursive;
             font-size: 1.25rem;
+            color: var(--cream-50);
         }
 
         .gift-lead a {
@@ -485,10 +504,8 @@
             text-decoration: none;
             color: #2d2d2d;
             margin-top: 2rem;
-            box-shadow:
-                0 8px 32px rgba(0,0,0,0.25),
-                0 0 0 1px rgba(255,255,255,0.05);
-            transition: transform 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.05);
+            transition: transform 0.3s;
         }
 
         .expo-card:active { transform: scale(0.98); }
@@ -517,20 +534,16 @@
             font-size: 1rem;
             color: var(--coral);
             margin-top: 1rem;
-            letter-spacing: 0.02em;
         }
 
         /* ================================================
-           ANIMATION HELPERS
+           ANIMATION
            ================================================ */
         .si {
             opacity: 0;
             transform: translateY(18px);
         }
 
-        /* ================================================
-           REDUCED MOTION
-           ================================================ */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -545,8 +558,10 @@
            RESPONSIVE
            ================================================ */
         @media (max-width: 380px) {
-            .page { padding: 1.5rem 1.25rem 2rem; }
+            .page { padding: 1.5rem 1.25rem 2.5rem; }
             .menu-card { padding: 1.5rem 1rem; }
+            .tab { padding: 7px 8px; gap: 4px; }
+            .tab-icon { font-size: 1rem; }
         }
 
         @media (min-width: 768px) {
@@ -556,24 +571,48 @@
 </head>
 <body>
 
-    <!-- Film grain -->
     <div class="grain" aria-hidden="true"></div>
 
+    <!-- ====== TOP NAV ====== -->
+    <nav class="nav-bar" aria-label="Pages">
+        <button class="tab active" data-page="0" aria-label="Home">
+            <span class="tab-icon">&#x1F40D;</span>
+            <span class="tab-label">Home</span>
+        </button>
+        <button class="tab" data-page="1" aria-label="Weekend">
+            <span class="tab-icon">&#x1F37E;</span>
+            <span class="tab-label">Weekend</span>
+        </button>
+        <button class="tab" data-page="2" aria-label="Menu">
+            <span class="tab-icon">&#x1F373;</span>
+            <span class="tab-label">Menu</span>
+        </button>
+        <button class="tab" data-page="3" aria-label="Vibes">
+            <span class="tab-icon">&#x1F3B5;</span>
+            <span class="tab-label">Vibes</span>
+        </button>
+        <button class="tab" data-page="4" aria-label="Gift">
+            <span class="tab-icon">&#x1F381;</span>
+            <span class="tab-label">Gift</span>
+        </button>
+    </nav>
+
+    <!-- ====== PAGES ====== -->
     <main class="app">
 
-        <!-- ====== HOME ====== -->
+        <!-- HOME -->
         <section class="page active" id="home">
             <div class="page-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%">
 
                 <svg class="hero-snake-svg" viewBox="0 0 200 70" fill="none" aria-hidden="true">
                     <path class="snake-body"
                           d="M8,35 C30,8 50,62 80,35 C110,8 130,62 160,35 C180,18 192,35 195,35"
-                          stroke="url(#snakeGrad)" stroke-width="6" stroke-linecap="round"/>
+                          stroke="url(#sg)" stroke-width="6" stroke-linecap="round"/>
                     <path d="M193,35 L200,30 M193,35 L200,40"
                           stroke="var(--coral)" stroke-width="2.5" stroke-linecap="round"/>
                     <circle cx="190" cy="32" r="2" fill="var(--gold)"/>
                     <defs>
-                        <linearGradient id="snakeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stop-color="var(--green)"/>
                             <stop offset="50%" stop-color="var(--orange)"/>
                             <stop offset="100%" stop-color="var(--coral)"/>
@@ -584,11 +623,22 @@
                 <p class="hero-pre si">Annie's</p>
                 <h1 class="hero-title si">Birthdart<br>Bash</h1>
                 <p class="hero-tagline si">"I eat bad days for breakfast"</p>
-                <p class="swipe-hint si">swipe or tap below to explore</p>
+
+                <div class="hero-player si">
+                    <iframe
+                        src="https://open.spotify.com/embed/track/6fJmlHagoYGxAi3Xilczuo?utm_source=generator&theme=0"
+                        height="80"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="eager">
+                    </iframe>
+                </div>
+                <p class="hero-player-hint si">&#9654; press play</p>
+
+                <p class="swipe-hint si">swipe or tap to explore</p>
             </div>
         </section>
 
-        <!-- ====== WEEKEND ====== -->
+        <!-- WEEKEND -->
         <section class="page" id="weekend">
             <div class="page-content">
                 <div class="page-header si">
@@ -629,12 +679,11 @@
             </div>
         </section>
 
-        <!-- ====== MENU ====== -->
+        <!-- MENU -->
         <section class="page" id="menu">
             <div class="page-content">
                 <div class="menu-card si">
                     <div class="menu-ornament">&starf; &starf; &starf;</div>
-
                     <div class="menu-top">
                         <h2>Birthdart Breakfast</h2>
                         <p class="motto">"I eat bad days for breakfast"</p>
@@ -689,12 +738,12 @@
             </div>
         </section>
 
-        <!-- ====== VIBES ====== -->
+        <!-- VIBES -->
         <section class="page" id="vibes">
             <div class="page-content">
                 <div class="page-header si">
                     <h2>The Vibes</h2>
-                    <p>Press play. Set the mood.</p>
+                    <p>The official playlist</p>
                     <svg class="squiggle" viewBox="0 0 100 8" fill="none" aria-hidden="true">
                         <path d="M0,4 C12.5,0 12.5,8 25,4 C37.5,0 37.5,8 50,4 C62.5,0 62.5,8 75,4 C87.5,0 87.5,8 100,4" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
                     </svg>
@@ -723,7 +772,7 @@
             </div>
         </section>
 
-        <!-- ====== GIFT ====== -->
+        <!-- GIFT -->
         <section class="page" id="gift">
             <div class="page-content">
                 <div class="gift-header si">
@@ -744,128 +793,99 @@
 
     </main>
 
-    <!-- ====== TAB BAR ====== -->
-    <nav class="tab-bar" aria-label="Page navigation">
-        <button class="tab active" data-page="0" aria-label="Home">
-            <span class="tab-icon">&#x1F40D;</span>
-            <span>Home</span>
-        </button>
-        <button class="tab" data-page="1" aria-label="Weekend">
-            <span class="tab-icon">&#x1F37E;</span>
-            <span>Weekend</span>
-        </button>
-        <button class="tab" data-page="2" aria-label="Menu">
-            <span class="tab-icon">&#x1F373;</span>
-            <span>Menu</span>
-        </button>
-        <button class="tab" data-page="3" aria-label="Vibes">
-            <span class="tab-icon">&#x1F3B5;</span>
-            <span>Vibes</span>
-        </button>
-        <button class="tab" data-page="4" aria-label="Gift">
-            <span class="tab-icon">&#x1F381;</span>
-            <span>Gift</span>
-        </button>
-    </nav>
-
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
     <script>
     (function () {
-        const pageIds = ['home', 'weekend', 'menu', 'vibes', 'gift'];
+        const ids = ['home', 'weekend', 'menu', 'vibes', 'gift'];
         const tabs = document.querySelectorAll('.tab');
         const appEl = document.querySelector('.app');
-        let current = 0;
-        let busy = false;
+        let cur = 0, busy = false;
 
-        /* ---- Initial reveal ---- */
+        /* Initial reveal */
         window.addEventListener('load', () => {
             document.querySelector('.snake-body')?.classList.add('drawn');
-            revealContent('home');
+            reveal('home');
         });
 
-        /* ---- Navigation ---- */
-        function goTo(index, dir) {
-            if (index === current || index < 0 || index >= pageIds.length || busy) return;
+        /* Navigate */
+        function goTo(i, dir) {
+            if (i === cur || i < 0 || i >= ids.length || busy) return;
             busy = true;
-            dir = dir ?? (index > current ? 1 : -1);
+            dir = dir ?? (i > cur ? 1 : -1);
 
-            const oldEl = document.getElementById(pageIds[current]);
-            const newEl = document.getElementById(pageIds[index]);
+            const from = document.getElementById(ids[cur]);
+            const to = document.getElementById(ids[i]);
 
-            tabs.forEach((t, i) => t.classList.toggle('active', i === index));
+            tabs.forEach((t, idx) => t.classList.toggle('active', idx === i));
 
-            // Reset stagger items on incoming page
-            newEl.querySelectorAll('.si').forEach(el => {
+            to.querySelectorAll('.si').forEach(el => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(18px)';
             });
 
             if (typeof gsap !== 'undefined') {
-                gsap.to(oldEl, {
-                    opacity: 0, x: -40 * dir, duration: 0.25, ease: 'power2.in',
+                gsap.to(from, {
+                    opacity: 0, x: -36 * dir, duration: 0.22, ease: 'power2.in',
                     onComplete() {
-                        oldEl.classList.remove('active');
-                        gsap.set(oldEl, { x: 0, opacity: 0 });
+                        from.classList.remove('active');
+                        from.style.zIndex = '';
+                        gsap.set(from, { x: 0 });
 
-                        newEl.classList.add('active');
-                        newEl.scrollTop = 0;
-                        gsap.fromTo(newEl,
-                            { opacity: 0, x: 40 * dir },
-                            { opacity: 1, x: 0, duration: 0.3, ease: 'power2.out',
-                              onComplete() { busy = false; revealContent(pageIds[index]); }
+                        to.classList.add('active');
+                        to.scrollTop = 0;
+                        gsap.fromTo(to,
+                            { opacity: 0, x: 36 * dir },
+                            { opacity: 1, x: 0, duration: 0.28, ease: 'power2.out',
+                              onComplete() { busy = false; reveal(ids[i]); }
                             }
                         );
                     }
                 });
             } else {
-                oldEl.classList.remove('active');
-                newEl.classList.add('active');
-                newEl.scrollTop = 0;
-                newEl.querySelectorAll('.si').forEach(el => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'none';
+                from.classList.remove('active');
+                to.classList.add('active');
+                to.scrollTop = 0;
+                to.querySelectorAll('.si').forEach(el => {
+                    el.style.opacity = '1'; el.style.transform = 'none';
                 });
                 busy = false;
             }
-            current = index;
+            cur = i;
         }
 
-        function revealContent(pageId) {
-            const items = document.querySelectorAll('#' + pageId + ' .si');
+        function reveal(id) {
+            const items = document.querySelectorAll('#' + id + ' .si');
             if (typeof gsap !== 'undefined') {
                 gsap.fromTo(items,
                     { opacity: 0, y: 18 },
-                    { opacity: 1, y: 0, duration: 0.45, stagger: 0.08, ease: 'power2.out' }
+                    { opacity: 1, y: 0, duration: 0.4, stagger: 0.07, ease: 'power2.out' }
                 );
             } else {
                 items.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
             }
         }
 
-        /* ---- Tab clicks ---- */
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => goTo(parseInt(tab.dataset.page)));
-        });
+        /* Tab clicks */
+        tabs.forEach(t => t.addEventListener('click', () => goTo(+t.dataset.page)));
 
-        /* ---- Swipe ---- */
+        /* Swipe */
         let sx = 0, sy = 0;
         appEl.addEventListener('touchstart', e => {
-            sx = e.touches[0].clientX;
-            sy = e.touches[0].clientY;
+            sx = e.touches[0].clientX; sy = e.touches[0].clientY;
         }, { passive: true });
 
         appEl.addEventListener('touchend', e => {
             const dx = e.changedTouches[0].clientX - sx;
             const dy = e.changedTouches[0].clientY - sy;
             if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) {
-                goTo(current + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
+                goTo(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
             }
         }, { passive: true });
 
-        /* ---- Keyboard ---- */
+        /* Keyboard */
         document.addEventListener('keydown', e => {
-            if (e.key === 'ArrowRight') goTo(current + 1, 1);
-            if (e.key === 'ArrowLeft') goTo(current - 1, -1);
+            if (e.key === 'ArrowRight') goTo(cur + 1, 1);
+            if (e.key === 'ArrowLeft') goTo(cur - 1, -1);
         });
     })();
     </script>
