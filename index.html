@@ -588,9 +588,10 @@ document.querySelectorAll('.toggle-btn').forEach(btn=>{
     });
 });
 
-let sx=0,sy=0;
-appEl.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+let sx=0,sy=0,swipeTarget=null;
+appEl.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;swipeTarget=e.target;},{passive:true});
 appEl.addEventListener('touchend',e=>{
+    if(swipeTarget&&swipeTarget.closest('.photo-strip')) return;
     const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
     if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.4) goTo(cur+(dx<0?1:-1),dx<0?1:-1);
 },{passive:true});
