@@ -1,0 +1,18 @@
+# Windows/WSL artifacts
+*:Zone.Identifier
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Binaries / installers
+*.msi
+*.exe
+*.dmg
+
+# Claude Code local state
+.claude/
+
+# GSD planning (tracked separately per GSD workflow)
+# .planning/

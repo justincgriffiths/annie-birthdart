@@ -1,0 +1,7 @@
+.git/
+.github/
+.planning/
+.claude/
+*.msi
+*:Zone.Identifier
+*.md

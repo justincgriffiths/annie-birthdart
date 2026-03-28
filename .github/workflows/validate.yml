@@ -1,0 +1,37 @@
+name: Validate
+
+on:
+  push:
+    branches: [dev, staging]
+  pull_request:
+    branches: [staging, main]
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate HTML
+        uses: nickhealthy/htmlhint-action@v1
+        with:
+          path: "index.html"
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --verbose --no-progress index.html
+          fail: false
+
+      - name: Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://annielovessnakes.com
+          uploadArtifacts: true
+          temporaryPublicStorage: true
