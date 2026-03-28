@@ -532,7 +532,14 @@ window.addEventListener('load',()=>{
     document.querySelector('.snake-body')?.classList.add('drawn');
     const hash=location.hash.replace('#','');
     const startIdx=ids.indexOf(hash);
-    if(startIdx>0){goTo(startIdx);} else {reveal('home');}
+    if(startIdx>0){
+        document.getElementById('home').classList.remove('active');
+        tabs.forEach((b,x)=>b.classList.toggle('active',x===startIdx));
+        const t=document.getElementById(ids[startIdx]);
+        t.classList.add('active');t.scrollTop=0;
+        cur=startIdx;
+        reveal(ids[startIdx]);
+    } else {reveal('home');}
 });
 
 function goTo(i,dir){
