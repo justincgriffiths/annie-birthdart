@@ -218,6 +218,8 @@
         .gift-reveal-btn.revealed { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .gift-reveal-panel { width: 100%; max-width: 440px; overflow: hidden; max-height: 0; opacity: 0; margin-top: 0; }
         .gift-reveal-panel.open { margin-top: 1.5rem; }
+        .gift-video { width: 100%; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.35); margin-bottom: 1.5rem; }
+        .gift-video iframe { display: block; width: 100%; border: none; border-radius: 12px; }
         .expo-card { display: block; background: #faf6ee; border-radius: 16px; padding: 2rem 1.5rem 1.75rem; text-align: center; text-decoration: none; color: #2d2d2d; box-shadow: 0 8px 32px rgba(0,0,0,0.25); transition: transform 0.3s; }
         .expo-card:active { transform: scale(0.98); }
         .expo-card img { max-width: 100%; height: auto; margin-bottom: 1.25rem; }
@@ -425,6 +427,9 @@
             </button>
 
             <div class="gift-reveal-panel" id="gift-reveal-panel" aria-hidden="true">
+                <div class="gift-video">
+                    <iframe id="gift-video-iframe" width="100%" height="215" src="about:blank" data-src="https://www.youtube.com/embed/i6lH7cUeaQg?start=5&amp;autoplay=1" title="Gift reveal" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                </div>
                 <a href="https://reptileexpo.com/all-shows/white-plains-expo/" target="_blank" rel="noopener noreferrer" class="expo-card">
                     <img src="reptile-expo.png" alt="Reptile Expo" width="571" height="116">
                     <div class="expo-date">Sunday, April 12</div>
@@ -609,6 +614,8 @@ function spawnConfetti(){
 if(giftBtn&&giftPanel) giftBtn.addEventListener('click',function(){
     giftBtn.setAttribute('aria-expanded','true');
     giftPanel.setAttribute('aria-hidden','false');
+    const vIframe=document.getElementById('gift-video-iframe');
+    if(vIframe&&vIframe.dataset.src&&!vIframe.src) vIframe.src=vIframe.dataset.src;
     const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(typeof gsap!=='undefined'&&!prefersReduced){
         gsap.to(giftBtn,{opacity:0,scale:0.8,duration:0.3,ease:'power2.in',onComplete(){giftBtn.classList.add('revealed');}});
