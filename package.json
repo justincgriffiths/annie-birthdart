@@ -1,0 +1,16 @@
+{
+  "name": "annie-birthdart",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "npx playwright test",
+    "test:mobile": "npx playwright test --project=mobile",
+    "test:desktop": "npx playwright test --project=desktop",
+    "serve": "npx serve . -l 3000 -s"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "playwright": "^1.58.2",
+    "serve": "^14.2.4"
+  }
+}

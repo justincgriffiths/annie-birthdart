@@ -14,5 +14,15 @@ Desktop.ini
 # Claude Code local state
 .claude/
 
+# Node
+node_modules/
+
+# Playwright
+test-results/
+playwright-report/
+
+# Source photos (web-optimized copies in images/)
+images/annie/
+
 # GSD planning (tracked separately per GSD workflow)
 # .planning/
