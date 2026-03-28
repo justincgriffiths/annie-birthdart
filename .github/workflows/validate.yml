@@ -1,4 +1,4 @@
-name: Validate
+name: Validate & Test
 
 on:
   push:
@@ -13,9 +13,14 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
       - name: Validate HTML
         run: npx htmlhint@latest index.html
@@ -25,3 +30,20 @@ jobs:
         with:
           args: --verbose --no-progress index.html
           fail: false
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run tests
+        run: npx playwright test --project=mobile
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results/
+          retention-days: 7

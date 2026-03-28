@@ -2,14 +2,14 @@ name: Deploy Preview
 
 on:
   push:
-    branches: [staging]
+    branches: [dev, staging]
 
 concurrency:
-  group: deploy-preview
+  group: deploy-${{ github.ref_name }}
   cancel-in-progress: true
 
 jobs:
-  preview:
+  deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -23,7 +23,16 @@ jobs:
       - name: Install Surge
         run: npm install -g surge
 
+      - name: Set deploy domain
+        id: domain
+        run: |
+          if [ "${{ github.ref_name }}" = "staging" ]; then
+            echo "url=staging.annielovessnakes.com" >> $GITHUB_OUTPUT
+          else
+            echo "url=dev.annielovessnakes.com" >> $GITHUB_OUTPUT
+          fi
+
       - name: Deploy to Surge
-        run: surge . annie-birthdart-staging.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+        run: surge . ${{ steps.domain.outputs.url }} --token ${{ secrets.SURGE_TOKEN }}
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
