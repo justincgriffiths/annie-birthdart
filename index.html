@@ -98,13 +98,13 @@
         .page-header p { font-family: 'Caveat', cursive; font-size: 1.15rem; color: var(--cream-50); margin-top: 0.25rem; }
         .squiggle { display: block; width: 80px; height: 8px; margin: 0.75rem auto 0; }
         .photo { width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); margin: 1.25rem 0; display: block; }
-        .photo-row { display: flex; gap: 0.5rem; margin: 1.25rem 0; align-items: center; }
-        .photo-row .photo { flex: 1; min-width: 0; object-fit: cover; aspect-ratio: 1; margin: 0; }
-        .photo-row .photo:only-child { aspect-ratio: auto; }
+        .photo-row { display: flex; gap: 0.5rem; margin: 1.25rem 0; }
+        .photo-row .photo { flex: 1; min-width: 0; object-fit: cover; height: 280px; margin: 0; }
+        .photo-row .photo:only-child { height: auto; object-fit: contain; }
         .photo-caption { font-family: 'Caveat', cursive; font-size: 0.85rem; color: var(--cream-30); text-align: center; margin-top: -0.5rem; margin-bottom: 1rem; }
         .photo-strip { display: flex; gap: 0.75rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0.5rem 0 1rem; scrollbar-width: none; }
         .photo-strip::-webkit-scrollbar { display: none; }
-        .photo-strip .photo { flex: 0 0 70%; scroll-snap-align: center; height: auto; margin: 0; }
+        .photo-strip .photo { flex: 0 0 75%; scroll-snap-align: center; height: 240px; object-fit: cover; margin: 0; border-radius: 12px; }
 
         /* ===== HOME ===== */
         #home {
@@ -151,27 +151,6 @@
         .menu-item-name { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 1.05rem; }
         .menu-item-desc { font-style: italic; font-size: 0.82rem; color: var(--cream-30); margin-top: 0.1rem; line-height: 1.4; }
         .menu-rule { text-align: center; margin: 1rem 0; color: var(--bg-border); font-size: 1.5rem; letter-spacing: 0.5em; }
-
-        /* ===== PERSISTENT PLAYER ===== */
-        .player-bar {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            z-index: 1002;
-            background: var(--nav-bg);
-            border-top: 1px solid var(--bg-border);
-            padding: 0;
-            transition: transform 0.3s ease;
-        }
-        .player-bar iframe { width: 100%; border: none; display: block; }
-        .player-toggle {
-            position: absolute; top: -28px; right: 12px;
-            background: var(--nav-bg); border: 1px solid var(--bg-border);
-            border-bottom: none; border-radius: 8px 8px 0 0;
-            color: var(--cream-30); font-size: 0.65rem; padding: 4px 10px;
-            cursor: pointer; font-family: 'DM Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .player-bar.collapsed { transform: translateY(100%); }
-        .player-bar.collapsed .player-toggle { top: -28px; transform: translateY(-100%); position: fixed; bottom: 0; right: 12px; border-bottom: none; border-radius: 8px 8px 0 0; }
 
         /* ===== PUBLICATIONS ===== */
         #pubs { background: var(--bg); }
@@ -291,8 +270,8 @@
             <div class="photo-strip si" style="margin-top:1.5rem">
                 <img src="images/hero-dance.jpg" alt="Annie on the dance floor" class="photo" loading="lazy">
                 <img src="images/hiking.jpg" alt="Hiking adventure" class="photo" loading="lazy">
-                <img src="images/birthday-cake.jpg" alt="Birthday cake" class="photo" loading="lazy">
-                <img src="images/beach.jpg" alt="Beach day" class="photo" loading="lazy">
+                <img src="images/couch-reading.jpg" alt="Story time" class="photo" loading="lazy">
+                <img src="images/dinner.jpg" alt="Dinner" class="photo" loading="lazy">
             </div>
         </div>
     </section>
@@ -314,10 +293,7 @@
                     <div class="setlist-item"><span class="setlist-time">Morning</span><span class="setlist-event">The Birthdart Breakfast</span></div>
                 </div>
             </div>
-            <div class="photo-row si" style="margin-top:2rem">
-                <img src="images/party-annie.jpg" alt="Party vibes" class="photo" loading="lazy">
-                <img src="images/dinner.jpg" alt="Dinner time" class="photo" loading="lazy">
-            </div>
+            <img src="images/dinner.jpg" alt="Dinner with friends" class="photo si" style="margin-top:2rem" loading="lazy">
         </div>
     </section>
 
@@ -389,9 +365,9 @@
                     <div class="college-label">All 51 Publications</div>
                 </div>
                 <div id="pub-list"></div>
-                <div class="photo-row" style="margin-top:1.5rem">
-                    <img src="images/fancy-coat.jpg" alt="City style" class="photo" loading="lazy">
-                    <img src="images/city-hall.jpg" alt="City Hall" class="photo" loading="lazy">
+                <div class="photo-row" style="margin-top:1.5rem;--row-h:340px">
+                    <img src="images/fancy-coat.jpg" alt="City style" class="photo" style="height:var(--row-h)" loading="lazy">
+                    <img src="images/city-hall.jpg" alt="City Hall" class="photo" style="height:var(--row-h)" loading="lazy">
                 </div>
             </div>
 
@@ -474,8 +450,6 @@
     </section>
 
 </main>
-
-<!-- player-bar removed: Spotify embed returning 404. Fix on dev branch. -->
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
 <script>
@@ -608,14 +582,6 @@ appEl.addEventListener('touchend',e=>{
 document.addEventListener('keydown',e=>{
     if(e.key==='ArrowRight')goTo(cur+1,1);
     if(e.key==='ArrowLeft')goTo(cur-1,-1);
-});
-
-/* Player bar toggle */
-const pb=document.getElementById('player-bar'),pt=document.getElementById('player-toggle');
-if(pb&&pt) pt.addEventListener('click',()=>{
-    const c=pb.classList.toggle('collapsed');
-    document.querySelector('.app').style.bottom=c?'0':'82px';
-    pt.innerHTML=c?'&#x1F3B5; show playlist':'&#x1F3B5; playlist';
 });
 
 /* Gift reveal */

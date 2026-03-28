@@ -51,12 +51,10 @@ test.describe('Images', () => {
       const img = photoRowImages.nth(i);
       const box = await img.boundingBox();
       if (box && box.width > 0 && box.height > 0) {
-        // In a photo-row with aspect-ratio: 1, images should be roughly square
-        // Allow some tolerance for rounding
-        const ratio = box.width / box.height;
-        expect(ratio, `Photo-row image ${i} has unexpected ratio ${ratio}`)
-          .toBeGreaterThan(0.8);
-        expect(ratio).toBeLessThan(1.25);
+        // Photos in a row should have consistent height (object-fit: cover)
+        // and reasonable width (not squished to zero)
+        expect(box.height, `Photo-row image ${i} too short`).toBeGreaterThan(100);
+        expect(box.width, `Photo-row image ${i} too narrow`).toBeGreaterThan(50);
       }
     }
   });
