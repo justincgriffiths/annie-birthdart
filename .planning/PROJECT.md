@@ -43,6 +43,8 @@ Annie can always visit annielovessnakes.com and find something new, personal, an
 - **Staging preview**: Surge.sh at annie-birthdart-staging.surge.sh (token setup pending)
 - **Annie**: Dr. Anne E. Nigra — epidemiologist, Dartmouth alumna, mama of 2, snake lover
 - **Tone**: Country-psychedelic, personal, playful — the site should feel like a love letter
+- **Photos**: Google Photos album at https://photos.app.goo.gl/zSRtoVcQJAJL4pMx5 — source for photo gallery feature
+- **Contributors**: Amelia and Rosie are coordinating on content (groceries, schedule, gifts). Amelia provided content edits.
 
 ## Constraints
 
