@@ -33,9 +33,7 @@
             --nav-bg: #12100d;
             --nav-h: 48px;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html, body {
             height: 100%;
             overflow: hidden;
@@ -45,850 +43,418 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ================================================
-           TOP NAV — pill tabs
-           ================================================ */
+        /* ===== TOP NAV ===== */
         .nav-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            position: fixed; top: 0; left: 0; right: 0;
             height: var(--nav-h);
             background: var(--nav-bg);
             border-bottom: 1px solid var(--bg-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            display: flex; align-items: center; justify-content: center; gap: 4px;
             z-index: 1001;
-            padding: 0 12px;
+            padding: 0 8px;
             padding-top: env(safe-area-inset-top, 0px);
         }
-
         .tab {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 7px 10px;
-            border-radius: 20px;
-            background: none;
-            border: none;
+            display: flex; align-items: center; gap: 4px;
+            padding: 6px 9px; border-radius: 20px;
+            background: none; border: none;
             color: var(--cream-30);
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.65rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            cursor: pointer;
-            transition: background 0.25s, color 0.25s;
-            -webkit-tap-highlight-color: transparent;
-            white-space: nowrap;
+            font-size: 0.6rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            cursor: pointer; transition: background 0.25s, color 0.25s;
+            -webkit-tap-highlight-color: transparent; white-space: nowrap;
         }
-
-        .tab-icon { font-size: 1.15rem; line-height: 1; }
+        .tab-icon { font-size: 1.05rem; line-height: 1; }
         .tab-label { display: none; }
-
-        .tab.active {
-            background: var(--orange-bg);
-            color: var(--orange);
-        }
-
+        .tab.active { background: var(--orange-bg); color: var(--orange); }
         .tab.active .tab-label { display: inline; }
 
-        /* ================================================
-           APP SHELL
-           ================================================ */
+        /* ===== APP SHELL ===== */
         .app {
-            position: fixed;
-            top: var(--nav-h);
-            bottom: 0;
-            left: 0;
-            right: 0;
+            position: fixed; top: var(--nav-h); bottom: 0; left: 0; right: 0;
             overflow: hidden;
         }
-
         .page {
-            position: absolute;
-            inset: 0;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            opacity: 0;
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            position: absolute; inset: 0;
+            overflow-y: auto; -webkit-overflow-scrolling: touch;
+            opacity: 0; pointer-events: none;
+            display: flex; flex-direction: column; align-items: center;
             padding: 2rem 1.5rem 3rem;
         }
+        .page.active { opacity: 1; pointer-events: auto; z-index: 1; }
+        .page-content { width: 100%; max-width: 440px; }
 
-        .page.active {
-            opacity: 1;
-            pointer-events: auto;
-            z-index: 1;
-        }
-
-        .page-content {
-            width: 100%;
-            max-width: 440px;
-        }
-
-        /* ================================================
-           FILM GRAIN
-           ================================================ */
+        /* ===== GRAIN ===== */
         .grain {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 10000;
-            opacity: 0.06;
-            mix-blend-mode: overlay;
-            background-repeat: repeat;
-            background-size: 256px 256px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
+            position: fixed; inset: 0; pointer-events: none; z-index: 10000;
+            opacity: 0.06; mix-blend-mode: overlay;
+            background: repeat / 256px 256px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
         }
 
-        /* ================================================
-           SHARED
-           ================================================ */
-        .page-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+        /* ===== SHARED ===== */
+        .page-header { text-align: center; margin-bottom: 2rem; }
+        .page-header h2 { font-family: 'Rye', Georgia, serif; font-size: clamp(1.5rem, 7vw, 2rem); color: var(--orange); }
+        .page-header p { font-family: 'Caveat', cursive; font-size: 1.15rem; color: var(--cream-50); margin-top: 0.25rem; }
+        .squiggle { display: block; width: 80px; height: 8px; margin: 0.75rem auto 0; }
 
-        .page-header h2 {
-            font-family: 'Rye', Georgia, serif;
-            font-size: clamp(1.5rem, 7vw, 2rem);
-            color: var(--orange);
-        }
-
-        .page-header p {
-            font-family: 'Caveat', cursive;
-            font-size: 1.15rem;
-            color: var(--cream-50);
-            margin-top: 0.25rem;
-        }
-
-        .squiggle {
-            display: block;
-            width: 80px;
-            height: 8px;
-            margin: 0.75rem auto 0;
-        }
-
-        /* ================================================
-           HOME
-           ================================================ */
+        /* ===== HOME ===== */
         #home {
-            justify-content: center;
-            text-align: center;
-            background:
-                radial-gradient(ellipse at 50% 30%, rgba(232,122,44,0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 30% 70%, rgba(107,76,122,0.04) 0%, transparent 50%),
-                var(--bg);
+            justify-content: center; text-align: center;
+            background: radial-gradient(ellipse at 50% 30%, rgba(232,122,44,0.06) 0%, transparent 60%),
+                        radial-gradient(ellipse at 30% 70%, rgba(107,76,122,0.04) 0%, transparent 50%), var(--bg);
         }
+        .hero-snake-svg { width: 150px; max-width: 42vw; margin: 0 auto 1.25rem; filter: drop-shadow(0 2px 8px rgba(232,122,44,0.25)); }
+        .snake-body { stroke-dasharray: 400; stroke-dashoffset: 400; }
+        .snake-body.drawn { animation: drawSnake 1.8s cubic-bezier(0.4,0,0.2,1) forwards; }
+        @keyframes drawSnake { to { stroke-dashoffset: 0; } }
+        .hero-pre { font-family: 'Caveat', cursive; font-size: clamp(1.3rem, 4vw, 1.7rem); color: var(--cream-50); margin-bottom: 0.1rem; }
+        .hero-title { font-family: 'Rye', Georgia, serif; font-size: clamp(2.2rem, 10vw, 3.6rem); line-height: 1.05; background: linear-gradient(135deg, var(--orange), var(--gold) 40%, var(--green-bright) 80%, var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-tagline { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 0.85rem; color: var(--cream-30); margin-top: 0.75rem; }
+        .hero-player { width: 100%; max-width: 360px; margin: 1.25rem auto 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.35); }
+        .hero-player iframe { display: block; width: 100%; border: none; }
+        .hero-player-hint { font-family: 'Caveat', cursive; font-size: 0.95rem; color: var(--cream-30); margin-top: 0.6rem; }
+        .swipe-hint { margin-top: 1.25rem; font-size: 0.68rem; color: var(--cream-30); letter-spacing: 0.05em; animation: pulse 2.5s ease-in-out infinite; }
+        @keyframes pulse { 0%,100% { opacity: 0.25; } 50% { opacity: 0.65; } }
 
-        .hero-snake-svg {
-            width: 160px;
-            max-width: 45vw;
-            margin: 0 auto 1.5rem;
-            filter: drop-shadow(0 2px 8px rgba(232,122,44,0.25));
-        }
-
-        .snake-body {
-            stroke-dasharray: 400;
-            stroke-dashoffset: 400;
-        }
-
-        .snake-body.drawn {
-            animation: drawSnake 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        @keyframes drawSnake {
-            to { stroke-dashoffset: 0; }
-        }
-
-        .hero-pre {
-            font-family: 'Caveat', cursive;
-            font-size: clamp(1.4rem, 4.5vw, 1.8rem);
-            color: var(--cream-50);
-            margin-bottom: 0.15rem;
-        }
-
-        .hero-title {
-            font-family: 'Rye', Georgia, serif;
-            font-size: clamp(2.4rem, 10vw, 3.8rem);
-            line-height: 1.05;
-            background: linear-gradient(135deg, var(--orange) 0%, var(--gold) 40%, var(--green-bright) 80%, var(--purple) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-tagline {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-style: italic;
-            font-size: 0.9rem;
-            color: var(--cream-30);
-            margin-top: 1rem;
-        }
-
-        /* Landing player */
-        .hero-player {
-            width: 100%;
-            max-width: 380px;
-            margin: 1.5rem auto 0;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.35);
-        }
-
-        .hero-player iframe {
-            display: block;
-            width: 100%;
-            border: none;
-        }
-
-        .hero-player-hint {
-            font-family: 'Caveat', cursive;
-            font-size: 1rem;
-            color: var(--cream-30);
-            margin-top: 0.75rem;
-        }
-
-        .swipe-hint {
-            margin-top: 1.5rem;
-            font-size: 0.7rem;
-            color: var(--cream-30);
-            letter-spacing: 0.05em;
-            animation: pulse 2.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.25; }
-            50% { opacity: 0.65; }
-        }
-
-        /* ================================================
-           WEEKEND / SETLIST
-           ================================================ */
+        /* ===== WEEKEND ===== */
         #weekend { background: var(--bg); }
-
         .setlist-day { margin-bottom: 2rem; }
         .setlist-day:last-child { margin-bottom: 0; }
-
-        .setlist-day h3 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.15rem;
-            color: var(--gold);
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--bg-border);
-            margin-bottom: 0.75rem;
-        }
-
-        .setlist-item {
-            display: flex;
-            gap: 1rem;
-            padding: 0.5rem 0 0.5rem 1rem;
-            align-items: baseline;
-            border-left: 2px solid var(--bg-border);
-            transition: border-color 0.3s;
-        }
-
+        .setlist-day h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.15rem; color: var(--gold); padding-bottom: 0.5rem; border-bottom: 1px solid var(--bg-border); margin-bottom: 0.75rem; }
+        .setlist-item { display: flex; gap: 1rem; padding: 0.5rem 0 0.5rem 1rem; align-items: baseline; border-left: 2px solid var(--bg-border); transition: border-color 0.3s; }
         .setlist-item:hover { border-left-color: var(--orange); }
-
-        .setlist-time {
-            font-weight: 700;
-            color: var(--orange);
-            font-size: 0.85rem;
-            min-width: 68px;
-            white-space: nowrap;
-            font-variant-numeric: tabular-nums;
-        }
-
+        .setlist-time { font-weight: 700; color: var(--orange); font-size: 0.85rem; min-width: 68px; white-space: nowrap; font-variant-numeric: tabular-nums; }
         .setlist-event { font-size: 0.95rem; }
 
-        /* ================================================
-           MENU
-           ================================================ */
+        /* ===== MENU ===== */
         #menu { background: var(--bg); }
-
-        .menu-card {
-            background: var(--bg-card);
-            border: 1px solid var(--bg-border);
-            border-radius: 12px;
-            padding: 2rem 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .menu-card::before {
-            content: '';
-            position: absolute;
-            inset: 6px;
-            border: 1px solid var(--bg-border);
-            border-radius: 8px;
-            pointer-events: none;
-        }
-
-        .menu-ornament {
-            text-align: center;
-            color: var(--gold);
-            letter-spacing: 0.4em;
-            font-size: 0.55rem;
-            padding: 0.75rem 0;
-        }
-
-        .menu-top {
-            text-align: center;
-            padding: 0.5rem 0 1.25rem;
-            border-bottom: 1px solid var(--bg-border);
-            margin-bottom: 1.5rem;
-        }
-
-        .menu-top h2 {
-            font-family: 'Rye', Georgia, serif;
-            font-size: clamp(1rem, 4.5vw, 1.3rem);
-            color: var(--cream);
-        }
-
-        .menu-top .motto {
-            font-family: 'Caveat', cursive;
-            color: var(--gold);
-            font-size: 1.1rem;
-            margin-top: 0.2rem;
-        }
-
+        .menu-card { background: var(--bg-card); border: 1px solid var(--bg-border); border-radius: 12px; padding: 2rem 1.5rem; position: relative; overflow: hidden; }
+        .menu-card::before { content: ''; position: absolute; inset: 6px; border: 1px solid var(--bg-border); border-radius: 8px; pointer-events: none; }
+        .menu-ornament { text-align: center; color: var(--gold); letter-spacing: 0.4em; font-size: 0.55rem; padding: 0.75rem 0; }
+        .menu-top { text-align: center; padding: 0.5rem 0 1.25rem; border-bottom: 1px solid var(--bg-border); margin-bottom: 1.5rem; }
+        .menu-top h2 { font-family: 'Rye', Georgia, serif; font-size: clamp(1rem, 4.5vw, 1.3rem); color: var(--cream); }
+        .menu-top .motto { font-family: 'Caveat', cursive; color: var(--gold); font-size: 1.1rem; margin-top: 0.2rem; }
         .menu-section { margin-bottom: 1.25rem; }
         .menu-section:last-of-type { margin-bottom: 0; }
-
-        .menu-section-title {
-            font-family: 'Rye', Georgia, serif;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            color: var(--orange);
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        .menu-item {
-            text-align: center;
-            margin-bottom: 0.9rem;
-        }
-
+        .menu-section-title { font-family: 'Rye', Georgia, serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--orange); text-align: center; margin-bottom: 1rem; }
+        .menu-item { text-align: center; margin-bottom: 0.9rem; }
         .menu-item:last-child { margin-bottom: 0; }
+        .menu-item-name { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 1.05rem; }
+        .menu-item-desc { font-style: italic; font-size: 0.82rem; color: var(--cream-30); margin-top: 0.1rem; line-height: 1.4; }
+        .menu-rule { text-align: center; margin: 1rem 0; color: var(--bg-border); font-size: 1.5rem; letter-spacing: 0.5em; }
 
-        .menu-item-name {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-weight: 700;
-            font-size: 1.05rem;
-        }
-
-        .menu-item-desc {
-            font-style: italic;
-            font-size: 0.82rem;
-            color: var(--cream-30);
-            margin-top: 0.1rem;
-            line-height: 1.4;
-        }
-
-        .menu-rule {
-            text-align: center;
-            margin: 1rem 0;
-            color: var(--bg-border);
-            font-size: 1.5rem;
-            letter-spacing: 0.5em;
-        }
-
-        /* ================================================
-           VIBES — full playlist + movies
-           ================================================ */
+        /* ===== VIBES ===== */
         #vibes { background: var(--bg); }
+        .spotify-wrap { border-radius: 12px; overflow: hidden; margin-bottom: 2.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .spotify-wrap iframe { width: 100%; border: none; display: block; }
+        .movies-label { font-family: 'Rye', Georgia, serif; font-size: 0.75rem; color: var(--orange); text-align: center; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 1rem; }
+        .movie-cards { display: flex; gap: 0.75rem; }
+        .movie-card { flex: 1; background: var(--bg-card); border: 1px solid var(--bg-border); border-radius: 10px; padding: 1.25rem 1rem; text-align: center; transition: border-color 0.3s, transform 0.3s; }
+        .movie-card:active { border-color: var(--gold); transform: translateY(-2px); }
+        .movie-num { font-family: 'Caveat', cursive; font-size: 0.85rem; color: var(--gold); display: block; margin-bottom: 0.15rem; }
+        .movie-title { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 0.95rem; }
 
-        .spotify-wrap {
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
+        /* ===== PUBLICATIONS ===== */
+        #pubs { background: var(--bg); }
+        .pub-stats { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; }
+        .pub-stat { background: var(--bg-card); border: 1px solid var(--bg-border); border-radius: 8px; padding: 0.5rem 0.8rem; text-align: center; font-size: 0.7rem; color: var(--cream-50); }
+        .pub-stat strong { display: block; font-family: 'Rye', Georgia, serif; font-size: 1.1rem; color: var(--orange); margin-bottom: 1px; }
+        .pub-bio { font-size: 0.8rem; color: var(--cream-50); text-align: center; margin-bottom: 1.5rem; line-height: 1.5; }
+        .pub-bio strong { color: var(--cream); }
+        .pub-year { font-family: 'Rye', Georgia, serif; font-size: 0.85rem; color: var(--gold); padding: 1.25rem 0 0.4rem; border-bottom: 1px solid var(--bg-border); margin-bottom: 0.5rem; }
+        .pub-year:first-child { padding-top: 0; }
+        .pub-item { display: block; text-decoration: none; color: var(--cream); padding: 0.55rem 0; border-bottom: 1px solid rgba(58,50,40,0.4); transition: background 0.2s; border-radius: 4px; }
+        .pub-item:active { background: var(--orange-bg); }
+        .pub-title { display: block; font-size: 0.8rem; line-height: 1.35; }
+        .pub-journal { display: block; font-size: 0.68rem; color: var(--orange); margin-top: 0.15rem; font-style: italic; }
 
-        .spotify-wrap iframe {
-            width: 100%;
-            border: none;
-            display: block;
-        }
-
-        .movies-label {
-            font-family: 'Rye', Georgia, serif;
-            font-size: 0.75rem;
-            color: var(--orange);
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 1rem;
-        }
-
-        .movie-cards {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .movie-card {
-            flex: 1;
-            background: var(--bg-card);
-            border: 1px solid var(--bg-border);
-            border-radius: 10px;
-            padding: 1.25rem 1rem;
-            text-align: center;
-            transition: border-color 0.3s, transform 0.3s;
-        }
-
-        .movie-card:active {
-            border-color: var(--gold);
-            transform: translateY(-2px);
-        }
-
-        .movie-num {
-            font-family: 'Caveat', cursive;
-            font-size: 0.85rem;
-            color: var(--gold);
-            display: block;
-            margin-bottom: 0.15rem;
-        }
-
-        .movie-title {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-
-        /* ================================================
-           GIFT
-           ================================================ */
-        #gift {
-            background:
-                radial-gradient(ellipse at 50% 60%, rgba(61,122,90,0.15) 0%, transparent 60%),
-                linear-gradient(180deg, var(--reveal-bg) 0%, var(--bg) 100%);
-        }
-
-        .gift-header {
-            text-align: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .gift-header h2 {
-            font-family: 'Rye', Georgia, serif;
-            font-size: clamp(1.5rem, 7vw, 2rem);
-            color: var(--green-bright);
-        }
-
-        .gift-lead {
-            text-align: center;
-            font-family: 'Caveat', cursive;
-            font-size: 1.25rem;
-            color: var(--cream-50);
-        }
-
-        .gift-lead a {
-            color: var(--coral);
-            text-decoration: underline wavy;
-            text-underline-offset: 3px;
-            font-weight: 700;
-        }
-
-        .expo-card {
-            display: block;
-            background: #faf6ee;
-            border-radius: 16px;
-            padding: 2rem 1.5rem 1.75rem;
-            text-align: center;
-            text-decoration: none;
-            color: #2d2d2d;
-            margin-top: 2rem;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.05);
-            transition: transform 0.3s;
-        }
-
+        /* ===== GIFT ===== */
+        #gift { background: radial-gradient(ellipse at 50% 60%, rgba(61,122,90,0.15) 0%, transparent 60%), linear-gradient(180deg, var(--reveal-bg), var(--bg)); }
+        .gift-header { text-align: center; margin-bottom: 0.5rem; }
+        .gift-header h2 { font-family: 'Rye', Georgia, serif; font-size: clamp(1.5rem, 7vw, 2rem); color: var(--green-bright); }
+        .gift-lead { text-align: center; font-family: 'Caveat', cursive; font-size: 1.25rem; color: var(--cream-50); }
+        .gift-lead a { color: var(--coral); text-decoration: underline wavy; text-underline-offset: 3px; font-weight: 700; }
+        .expo-card { display: block; background: #faf6ee; border-radius: 16px; padding: 2rem 1.5rem 1.75rem; text-align: center; text-decoration: none; color: #2d2d2d; margin-top: 2rem; box-shadow: 0 8px 32px rgba(0,0,0,0.25); transition: transform 0.3s; }
         .expo-card:active { transform: scale(0.98); }
+        .expo-card img { max-width: 100%; height: auto; margin-bottom: 1.25rem; }
+        .expo-date { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--green); }
+        .expo-location { font-size: 0.9rem; color: #777; margin-top: 0.2rem; }
+        .expo-reveal { font-family: 'Rye', Georgia, serif; font-size: 1rem; color: var(--coral); margin-top: 1rem; }
 
-        .expo-card img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 1.25rem;
-        }
-
-        .expo-date {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--green);
-        }
-
-        .expo-location {
-            font-size: 0.9rem;
-            color: #777;
-            margin-top: 0.2rem;
-        }
-
-        .expo-reveal {
-            font-family: 'Rye', Georgia, serif;
-            font-size: 1rem;
-            color: var(--coral);
-            margin-top: 1rem;
-        }
-
-        /* ================================================
-           ANIMATION
-           ================================================ */
-        .si {
-            opacity: 0;
-            transform: translateY(18px);
-        }
-
+        /* ===== ANIM ===== */
+        .si { opacity: 0; transform: translateY(18px); }
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-            .grain { display: none; }
-            .si { opacity: 1; transform: none; }
-            .snake-body { stroke-dashoffset: 0 !important; }
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+            .grain { display: none; } .si { opacity: 1; transform: none; } .snake-body { stroke-dashoffset: 0 !important; }
         }
 
-        /* ================================================
-           RESPONSIVE
-           ================================================ */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 380px) {
             .page { padding: 1.5rem 1.25rem 2.5rem; }
             .menu-card { padding: 1.5rem 1rem; }
-            .tab { padding: 7px 8px; gap: 4px; }
-            .tab-icon { font-size: 1rem; }
+            .tab { padding: 6px 6px; gap: 3px; }
+            .tab-icon { font-size: 0.95rem; }
         }
-
-        @media (min-width: 768px) {
-            .page-content { max-width: 520px; }
-        }
+        @media (min-width: 768px) { .page-content { max-width: 520px; } }
     </style>
 </head>
 <body>
 
-    <div class="grain" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 
-    <!-- ====== TOP NAV ====== -->
-    <nav class="nav-bar" aria-label="Pages">
-        <button class="tab active" data-page="0" aria-label="Home">
-            <span class="tab-icon">&#x1F40D;</span>
-            <span class="tab-label">Home</span>
-        </button>
-        <button class="tab" data-page="1" aria-label="Weekend">
-            <span class="tab-icon">&#x1F37E;</span>
-            <span class="tab-label">Weekend</span>
-        </button>
-        <button class="tab" data-page="2" aria-label="Menu">
-            <span class="tab-icon">&#x1F373;</span>
-            <span class="tab-label">Menu</span>
-        </button>
-        <button class="tab" data-page="3" aria-label="Vibes">
-            <span class="tab-icon">&#x1F3B5;</span>
-            <span class="tab-label">Vibes</span>
-        </button>
-        <button class="tab" data-page="4" aria-label="Gift">
-            <span class="tab-icon">&#x1F381;</span>
-            <span class="tab-label">Gift</span>
-        </button>
-    </nav>
+<nav class="nav-bar">
+    <button class="tab active" data-page="0"><span class="tab-icon">&#x1F40D;</span><span class="tab-label">Home</span></button>
+    <button class="tab" data-page="1"><span class="tab-icon">&#x1F37E;</span><span class="tab-label">Weekend</span></button>
+    <button class="tab" data-page="2"><span class="tab-icon">&#x1F373;</span><span class="tab-label">Menu</span></button>
+    <button class="tab" data-page="3"><span class="tab-icon">&#x1F3B5;</span><span class="tab-label">Vibes</span></button>
+    <button class="tab" data-page="4"><span class="tab-icon">&#x1F4DA;</span><span class="tab-label">R&eacute;sum&eacute;</span></button>
+    <button class="tab" data-page="5"><span class="tab-icon">&#x1F381;</span><span class="tab-label">Gift</span></button>
+</nav>
 
-    <!-- ====== PAGES ====== -->
-    <main class="app">
+<main class="app">
 
-        <!-- HOME -->
-        <section class="page active" id="home">
-            <div class="page-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%">
-
-                <svg class="hero-snake-svg" viewBox="0 0 200 70" fill="none" aria-hidden="true">
-                    <path class="snake-body"
-                          d="M8,35 C30,8 50,62 80,35 C110,8 130,62 160,35 C180,18 192,35 195,35"
-                          stroke="url(#sg)" stroke-width="6" stroke-linecap="round"/>
-                    <path d="M193,35 L200,30 M193,35 L200,40"
-                          stroke="var(--coral)" stroke-width="2.5" stroke-linecap="round"/>
-                    <circle cx="190" cy="32" r="2" fill="var(--gold)"/>
-                    <defs>
-                        <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="var(--green)"/>
-                            <stop offset="50%" stop-color="var(--orange)"/>
-                            <stop offset="100%" stop-color="var(--coral)"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-
-                <p class="hero-pre si">Annie's</p>
-                <h1 class="hero-title si">Birthdart<br>Bash</h1>
-                <p class="hero-tagline si">"I eat bad days for breakfast"</p>
-
-                <div class="hero-player si">
-                    <iframe
-                        src="https://open.spotify.com/embed/track/6fJmlHagoYGxAi3Xilczuo?utm_source=generator&theme=0"
-                        height="80"
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                        loading="eager">
-                    </iframe>
-                </div>
-                <p class="hero-player-hint si">&#9654; press play</p>
-
-                <p class="swipe-hint si">swipe or tap to explore</p>
+    <!-- HOME -->
+    <section class="page active" id="home">
+        <div class="page-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%">
+            <svg class="hero-snake-svg" viewBox="0 0 200 70" fill="none" aria-hidden="true">
+                <path class="snake-body" d="M8,35 C30,8 50,62 80,35 C110,8 130,62 160,35 C180,18 192,35 195,35" stroke="url(#sg)" stroke-width="6" stroke-linecap="round"/>
+                <path d="M193,35 L200,30 M193,35 L200,40" stroke="var(--coral)" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="190" cy="32" r="2" fill="var(--gold)"/>
+                <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--green)"/><stop offset="50%" stop-color="var(--orange)"/><stop offset="100%" stop-color="var(--coral)"/></linearGradient></defs>
+            </svg>
+            <p class="hero-pre si">Annie's</p>
+            <h1 class="hero-title si">Birthdart<br>Bash</h1>
+            <p class="hero-tagline si">"I eat bad days for breakfast"</p>
+            <div class="hero-player si">
+                <iframe src="https://open.spotify.com/embed/track/6fJmlHagoYGxAi3Xilczuo?utm_source=generator&theme=0" height="80" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>
             </div>
-        </section>
+            <p class="hero-player-hint si">&#9654; press play</p>
+            <p class="swipe-hint si">swipe or tap to explore</p>
+        </div>
+    </section>
 
-        <!-- WEEKEND -->
-        <section class="page" id="weekend">
-            <div class="page-content">
-                <div class="page-header si">
-                    <h2>The Weekend</h2>
-                    <p>Here's what's going down</p>
-                    <svg class="squiggle" viewBox="0 0 100 8" fill="none" aria-hidden="true">
-                        <path d="M0,4 C12.5,0 12.5,8 25,4 C37.5,0 37.5,8 50,4 C62.5,0 62.5,8 75,4 C87.5,0 87.5,8 100,4" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
-                    </svg>
+    <!-- WEEKEND -->
+    <section class="page" id="weekend">
+        <div class="page-content">
+            <div class="page-header si"><h2>The Weekend</h2><p>Here's what's going down</p></div>
+            <div class="setlist">
+                <div class="setlist-day si">
+                    <h3>Saturday</h3>
+                    <div class="setlist-item"><span class="setlist-time">4:00 PM</span><span class="setlist-event">Champagne at Rosie's</span></div>
+                    <div class="setlist-item"><span class="setlist-time">5:15 PM</span><span class="setlist-event">Saint Julivert Fisherie</span></div>
+                    <div class="setlist-item"><span class="setlist-time">8:00 PM</span><span class="setlist-event">Bar Bayeaux</span></div>
+                    <div class="setlist-item"><span class="setlist-time">9:30 PM</span><span class="setlist-event">Chiminea under the stars</span></div>
                 </div>
-                <div class="setlist">
-                    <div class="setlist-day si">
-                        <h3>Saturday</h3>
-                        <div class="setlist-item">
-                            <span class="setlist-time">4:00 PM</span>
-                            <span class="setlist-event">Champagne at Rosie's</span>
-                        </div>
-                        <div class="setlist-item">
-                            <span class="setlist-time">5:15 PM</span>
-                            <span class="setlist-event">Saint Julivert Fisherie</span>
-                        </div>
-                        <div class="setlist-item">
-                            <span class="setlist-time">8:00 PM</span>
-                            <span class="setlist-event">Bar Bayeaux</span>
-                        </div>
-                        <div class="setlist-item">
-                            <span class="setlist-time">9:30 PM</span>
-                            <span class="setlist-event">Chiminea under the stars</span>
-                        </div>
-                    </div>
-                    <div class="setlist-day si">
-                        <h3>Sunday</h3>
-                        <div class="setlist-item">
-                            <span class="setlist-time">Morning</span>
-                            <span class="setlist-event">The Birthdart Breakfast</span>
-                        </div>
-                    </div>
+                <div class="setlist-day si">
+                    <h3>Sunday</h3>
+                    <div class="setlist-item"><span class="setlist-time">Morning</span><span class="setlist-event">The Birthdart Breakfast</span></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- MENU -->
-        <section class="page" id="menu">
-            <div class="page-content">
-                <div class="menu-card si">
-                    <div class="menu-ornament">&starf; &starf; &starf;</div>
-                    <div class="menu-top">
-                        <h2>Birthdart Breakfast</h2>
-                        <p class="motto">"I eat bad days for breakfast"</p>
-                    </div>
+    <!-- MENU -->
+    <section class="page" id="menu">
+        <div class="page-content">
+            <div class="menu-card si">
+                <div class="menu-ornament">&starf; &starf; &starf;</div>
+                <div class="menu-top"><h2>Birthdart Breakfast</h2><p class="motto">"I eat bad days for breakfast"</p></div>
+                <div class="menu-section">
+                    <h3 class="menu-section-title">Nosh</h3>
+                    <div class="menu-item"><div class="menu-item-name">This S**t is Bananas</div><div class="menu-item-desc">Mochi banana pancakes with maple syrup &amp; fresh berries</div></div>
+                    <div class="menu-item"><div class="menu-item-name">Eggs On Plate</div><div class="menu-item-desc">Eggs the way you like 'em with homefries &amp; uncured local bacon</div></div>
+                    <div class="menu-item"><div class="menu-item-name">You Oat to Yo(gurt)</div><div class="menu-item-desc">Yogurt &amp; muesli with fresh berries</div></div>
+                </div>
+                <div class="menu-rule">&middot;&middot;&middot;</div>
+                <div class="menu-section">
+                    <h3 class="menu-section-title">Bevvies</h3>
+                    <div class="menu-item"><div class="menu-item-name">Beanz A Make Her Dance</div><div class="menu-item-desc">Coffee. Brewed strong &amp; bold, just like you.</div></div>
+                    <div class="menu-item"><div class="menu-item-name">Main Squeeze</div><div class="menu-item-desc">Freshly-squeezed OJ served with a hug</div></div>
+                    <div class="menu-item"><div class="menu-item-name">Mimosa</div><div class="menu-item-desc">We listen and we don't judge.</div></div>
+                </div>
+                <div class="menu-rule">&middot;&middot;&middot;</div>
+                <div class="menu-section">
+                    <h3 class="menu-section-title">Sweet Treats</h3>
+                    <div class="menu-item"><div class="menu-item-name">Cake, Cake, Cake</div><div class="menu-item-desc">More cake, more better.</div></div>
+                </div>
+                <div class="menu-ornament">&starf; &starf; &starf;</div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="menu-section">
-                        <h3 class="menu-section-title">Nosh</h3>
-                        <div class="menu-item">
-                            <div class="menu-item-name">This S**t is Bananas</div>
-                            <div class="menu-item-desc">Mochi banana pancakes with maple syrup &amp; fresh berries</div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-name">Eggs On Plate</div>
-                            <div class="menu-item-desc">Eggs the way you like 'em with homefries &amp; uncured local bacon</div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-name">You Oat to Yo(gurt)</div>
-                            <div class="menu-item-desc">Yogurt &amp; muesli with fresh berries</div>
-                        </div>
-                    </div>
-
-                    <div class="menu-rule">&middot;&middot;&middot;</div>
-
-                    <div class="menu-section">
-                        <h3 class="menu-section-title">Bevvies</h3>
-                        <div class="menu-item">
-                            <div class="menu-item-name">Beanz A Make Her Dance</div>
-                            <div class="menu-item-desc">Coffee. Brewed strong &amp; bold, just like you.</div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-name">Main Squeeze</div>
-                            <div class="menu-item-desc">Freshly-squeezed OJ served with a hug</div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-name">Mimosa</div>
-                            <div class="menu-item-desc">We listen and we don't judge.</div>
-                        </div>
-                    </div>
-
-                    <div class="menu-rule">&middot;&middot;&middot;</div>
-
-                    <div class="menu-section">
-                        <h3 class="menu-section-title">Sweet Treats</h3>
-                        <div class="menu-item">
-                            <div class="menu-item-name">Cake, Cake, Cake</div>
-                            <div class="menu-item-desc">More cake, more better.</div>
-                        </div>
-                    </div>
-
-                    <div class="menu-ornament">&starf; &starf; &starf;</div>
+    <!-- VIBES -->
+    <section class="page" id="vibes">
+        <div class="page-content">
+            <div class="page-header si"><h2>The Vibes</h2><p>The official playlist</p></div>
+            <div class="spotify-wrap si">
+                <iframe src="https://open.spotify.com/embed/playlist/33kGXY5y48zLQULXEXdxOp?utm_source=generator&theme=0" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+            <div class="si">
+                <h3 class="movies-label">Double Feature</h3>
+                <div class="movie-cards">
+                    <div class="movie-card"><span class="movie-num">Film I</span><span class="movie-title">The Fall Guy</span></div>
+                    <div class="movie-card"><span class="movie-num">Film II</span><span class="movie-title">Sinners</span></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- VIBES -->
-        <section class="page" id="vibes">
-            <div class="page-content">
-                <div class="page-header si">
-                    <h2>The Vibes</h2>
-                    <p>The official playlist</p>
-                    <svg class="squiggle" viewBox="0 0 100 8" fill="none" aria-hidden="true">
-                        <path d="M0,4 C12.5,0 12.5,8 25,4 C37.5,0 37.5,8 50,4 C62.5,0 62.5,8 75,4 C87.5,0 87.5,8 100,4" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
-                    </svg>
-                </div>
-                <div class="spotify-wrap si">
-                    <iframe
-                        src="https://open.spotify.com/embed/playlist/33kGXY5y48zLQULXEXdxOp?utm_source=generator&theme=0"
-                        height="352"
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                        loading="lazy">
-                    </iframe>
-                </div>
-                <div class="si">
-                    <h3 class="movies-label">Double Feature</h3>
-                    <div class="movie-cards">
-                        <div class="movie-card">
-                            <span class="movie-num">Film I</span>
-                            <span class="movie-title">The Fall Guy</span>
-                        </div>
-                        <div class="movie-card">
-                            <span class="movie-num">Film II</span>
-                            <span class="movie-title">Sinners</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- PUBLICATIONS -->
+    <section class="page" id="pubs">
+        <div class="page-content">
+            <div class="page-header si">
+                <h2>The R&eacute;sum&eacute;</h2>
+                <p>She won't brag, so we will.</p>
             </div>
-        </section>
-
-        <!-- GIFT -->
-        <section class="page" id="gift">
-            <div class="page-content">
-                <div class="gift-header si">
-                    <h2>One More Thing&hellip;</h2>
-                </div>
-                <p class="gift-lead si">
-                    You hate gifts. We know.<br>
-                    But <a href="https://www.youtube.com/watch?v=i6lH7cUeaQg&t=5s" target="_blank" rel="noopener noreferrer">too bad</a>.
-                </p>
-                <a href="https://reptileexpo.com/all-shows/white-plains-expo/" target="_blank" rel="noopener noreferrer" class="expo-card si">
-                    <img src="reptile-expo.png" alt="Reptile Expo" width="571" height="116">
-                    <div class="expo-date">Sunday, April 12</div>
-                    <div class="expo-location">White Plains, NY &bull; 9 AM &ndash; 4 PM</div>
-                    <div class="expo-reveal">You're going to the Reptile Expo</div>
-                </a>
+            <p class="pub-bio si"><strong>Dr. Anne E. Nigra</strong><br>Assistant Professor, Environmental Health Sciences<br>Columbia University Mailman School of Public Health<br>NIH Director's Early Independence Award</p>
+            <div class="pub-stats si">
+                <div class="pub-stat"><strong>51</strong>Publications</div>
+                <div class="pub-stat"><strong>10+</strong>Years</div>
+                <div class="pub-stat"><strong>$2M</strong>NIH Award</div>
             </div>
-        </section>
+            <div id="pub-list" class="si"></div>
+        </div>
+    </section>
 
-    </main>
+    <!-- GIFT -->
+    <section class="page" id="gift">
+        <div class="page-content">
+            <div class="gift-header si"><h2>One More Thing&hellip;</h2></div>
+            <p class="gift-lead si">You hate gifts. We know.<br>But <a href="https://www.youtube.com/watch?v=i6lH7cUeaQg&t=5s" target="_blank" rel="noopener noreferrer">too bad</a>.</p>
+            <a href="https://reptileexpo.com/all-shows/white-plains-expo/" target="_blank" rel="noopener noreferrer" class="expo-card si">
+                <img src="reptile-expo.png" alt="Reptile Expo" width="571" height="116">
+                <div class="expo-date">Sunday, April 12</div>
+                <div class="expo-location">White Plains, NY &bull; 9 AM &ndash; 4 PM</div>
+                <div class="expo-reveal">You're going to the Reptile Expo</div>
+            </a>
+        </div>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-    <script>
-    (function () {
-        const ids = ['home', 'weekend', 'menu', 'vibes', 'gift'];
-        const tabs = document.querySelectorAll('.tab');
-        const appEl = document.querySelector('.app');
-        let cur = 0, busy = false;
+</main>
 
-        /* Initial reveal */
-        window.addEventListener('load', () => {
-            document.querySelector('.snake-body')?.classList.add('drawn');
-            reveal('home');
-        });
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script>
+(function(){
+/* Publication data: [year, journal, title, pmid] */
+const P=[
+[2026,"JAMA Netw Open","Tropical Cyclone Exposure and Psychoactive Drug-Related Death Rates",41719042],
+[2026,"Environ Res","Drinking water arsenic, urinary arsenic biomarkers, and cognitive impairment in the REGARDS study",41534586],
+[2026,"J Expo Sci Environ Epidemiol","Public drinking water contaminant estimates for birth cohorts in the ECHO Cohort",39098852],
+[2025,"JAMA Netw Open","Public Water Arsenic and Birth Outcomes in the ECHO Cohort",40522663],
+[2025,"Environ Health Perspect","The Association of Arsenic Exposure and Metabolism Biomarkers with Subclinical Measures of Liver Disease",40493026],
+[2025,"Environ Health Perspect","The Association of Blood Lead with Cardiovascular Disease Incidence and Mortality: Strong Heart Study",40471206],
+[2025,"Prev Chronic Dis","Uranium Exposure, Hypertension, and Blood Pressure in the Strong Heart Family Study",40272946],
+[2025,"Environ Res","Uranium exposure and kidney tubule biomarkers in MESA",39922262],
+[2025,"Nature Medicine","Large floods drive changes in cause-specific mortality in the United States",39753964],
+[2025,"Environ Int","Private, public, and bottled drinking water: Shared contaminant-mixture exposures and effects challenge",39736175],
+[2025,"J Expo Sci Environ Epidemiol","Geographic and dietary differences of urinary uranium levels in the Strong Heart Family Study",38961273],
+[2024,"JACC Adv","Relationship Between Urinary Uranium and Cardiac Geometry and Left Ventricular Function: Strong Heart Study",39640231],
+[2024,"J Am Coll Cardiol","Urinary Metal Levels and Coronary Artery Calcification: MESA",39297845],
+[2024,"Environ Res","Arsenic speciation analysis in human urine for long term epidemiological studies: MESA",39179143],
+[2024,"Environ Health Perspect","Invited Perspective: The All About Arsenic Program\u2014A Blueprint for Leveraging Youth Engagement to Advance Water Justice",39166866],
+[2024,"Circulation","Association of Urinary Metals With Cardiovascular Disease Incidence and All-Cause Mortality in MESA",39087344],
+[2024,"Circ Res","Proteomics, Human Environmental Exposure, and Cardiometabolic Risk",38662804],
+[2024,"Diabetes Care","Association of Water Arsenic With Incident Diabetes in U.S. Adults: MESA and Strong Heart Study",38656975],
+[2024,"Nature Sustainability","Hazardous heat exposure among incarcerated people in the United States",41727418],
+[2024,"J Am Heart Assoc","The Contribution of Declines in Blood Lead Levels to Reductions in Blood Pressure Levels: Strong Heart Family Study",38205795],
+[2024,"J Expo Sci Environ Epidemiol","US drinking water quality: exposure risk profiles for seven legacy and emerging contaminants",37739995],
+[2024,"J Expo Sci Environ Epidemiol","Contribution of arsenic and uranium in private wells and community water systems to urinary biomarkers in US adults",37558699],
+[2024,"J Expo Sci Environ Epidemiol","Regional and racial/ethnic inequalities in public drinking water fluoride concentrations across the US",37391608],
+[2023,"Environ Health Perspect","Blood and Urinary Metal Levels among Exclusive Marijuana Users in NHANES (2005-2018)",37646523],
+[2023,"Environ Health Perspect","Geospatial Assessment of Racial/Ethnic Composition, Social Vulnerability, and Lead Water Service Lines in New York City",37646509],
+[2023,"Environ Res","Associations between area-level arsenic exposure and adverse birth outcomes: An ECHO-wide cohort analysis",37517496],
+[2023,"Environ Pollut","Impact of lowering the US maximum contaminant level on arsenic exposure",37331581],
+[2023,"Environ Res","Cross-sectional associations between drinking water arsenic and urinary inorganic arsenic: NHANES 2003-2014",36963713],
+[2022,"Nature Communications","Nationwide geospatial analysis of county racial and ethnic composition and public drinking water arsenic and uranium",36460659],
+[2022,"Environ Pollut","Socioeconomic vulnerability and public water arsenic concentrations across the US",36084737],
+[2022,"Environ Res","Blood cadmium, lead, manganese, mercury, and selenium levels in American Indian populations: Strong Heart Study",35977585],
+[2022,"Environ Int","A mass-balance approach to evaluate arsenic intake and excretion in different populations",35809487],
+[2022,"Environ Res","Association of blood manganese, selenium with steatosis, fibrosis in NHANES 2017-18",35691383],
+[2022,"Lancet Planetary Health","Sociodemographic inequalities in uranium and other metals in community water systems across the USA, 2006-11",35397220],
+[2022,"Antioxid Redox Signal","High Level of Selenium Exposure in the Strong Heart Study: A Cause for Incident Cardiovascular Disease?",35350849],
+[2021,"J Am Soc Nephrol","Racial Inequalities in Drinking Water Lead Exposure: A Wake-Up Call",34544822],
+[2021,"Environ Res","Urinary arsenic and heart disease mortality in NHANES 2003-2014",34090890],
+[2021,"Sci Total Environ","Associations between private well water and community water supply arsenic concentrations in the conterminous United States",33991916],
+[2020,"Environ Health Perspect","Inequalities in Public Water Arsenic Concentrations in Counties and Community Water Systems across the US, 2006-2011",33295795],
+[2020,"Proc Natl Acad Sci USA","Environmental racism and the need for private well protections",32641505],
+[2020,"Int J Environ Res Public Health","Urinary Metal Levels after Repeated Edetate Disodium Infusions: Preliminary Findings",32610666],
+[2020,"Environ Res","Arsenic in US correctional facility drinking water, 2006-2011",32585331],
+[2020,"Chemosphere","A survey of trace metal burdens in increment cores from eastern cottonwood across a childhood cancer cluster, Ohio",31425869],
+[2019,"Environ Res","Dietary determinants of inorganic arsenic exposure in the Strong Heart Family Study",31442790],
+[2018,"Environ Health Perspect","Opportunities and Challenges for Dietary Arsenic Intervention",30235424],
+[2018,"Environ Res","Urinary tungsten and incident cardiovascular disease in the Strong Heart Study",29940477],
+[2017,"Lancet Public Health","The effect of the Environmental Protection Agency maximum contaminant level on arsenic exposure in the USA from 2003 to 2014",29250608],
+[2017,"Sci Total Environ","Mitigating dietary arsenic exposure: Current status in the United States and recommendations for an improved path forward",28065543],
+[2017,"Environ Health Perspect","Poultry Consumption and Arsenic Exposure in the U.S. Population",27735790],
+[2017,"Environ Health Perspect","Nitarsone, Inorganic Arsenic, and Other Arsenic Species in Turkey Meat: Exposure and Risk Assessment",27735789],
+[2016,"Curr Environ Health Rep","Environmental Metals and Cardiovascular Disease in Adults: A Systematic Review Beyond Lead and Cadmium",27783356]
+];
 
-        /* Navigate */
-        function goTo(i, dir) {
-            if (i === cur || i < 0 || i >= ids.length || busy) return;
-            busy = true;
-            dir = dir ?? (i > cur ? 1 : -1);
+/* Render publications grouped by year */
+function renderPubs(){
+    const el=document.getElementById('pub-list');
+    if(!el)return;
+    let yr=0,h='';
+    P.forEach(([y,j,t,p])=>{
+        if(y!==yr){yr=y;h+=`<div class="pub-year">${y}</div>`;}
+        h+=`<a href="https://pubmed.ncbi.nlm.nih.gov/${p}/" target="_blank" rel="noopener" class="pub-item"><span class="pub-title">${t}</span><span class="pub-journal">${j}</span></a>`;
+    });
+    el.innerHTML=h;
+}
+renderPubs();
 
-            const from = document.getElementById(ids[cur]);
-            const to = document.getElementById(ids[i]);
+/* Nav + page logic */
+const ids=['home','weekend','menu','vibes','pubs','gift'];
+const tabs=document.querySelectorAll('.tab');
+const appEl=document.querySelector('.app');
+let cur=0,busy=false;
 
-            tabs.forEach((t, idx) => t.classList.toggle('active', idx === i));
+window.addEventListener('load',()=>{
+    document.querySelector('.snake-body')?.classList.add('drawn');
+    reveal('home');
+});
 
-            to.querySelectorAll('.si').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(18px)';
-            });
+function goTo(i,dir){
+    if(i===cur||i<0||i>=ids.length||busy)return;
+    busy=true; dir=dir??(i>cur?1:-1);
+    const f=document.getElementById(ids[cur]),t=document.getElementById(ids[i]);
+    tabs.forEach((b,x)=>b.classList.toggle('active',x===i));
+    t.querySelectorAll('.si').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(18px)';});
+    if(typeof gsap!=='undefined'){
+        gsap.to(f,{opacity:0,x:-36*dir,duration:0.22,ease:'power2.in',onComplete(){
+            f.classList.remove('active');f.style.zIndex='';gsap.set(f,{x:0});
+            t.classList.add('active');t.scrollTop=0;
+            gsap.fromTo(t,{opacity:0,x:36*dir},{opacity:1,x:0,duration:0.28,ease:'power2.out',onComplete(){busy=false;reveal(ids[i]);}});
+        }});
+    } else {
+        f.classList.remove('active');t.classList.add('active');t.scrollTop=0;
+        t.querySelectorAll('.si').forEach(el=>{el.style.opacity='1';el.style.transform='none';});
+        busy=false;
+    }
+    cur=i;
+}
 
-            if (typeof gsap !== 'undefined') {
-                gsap.to(from, {
-                    opacity: 0, x: -36 * dir, duration: 0.22, ease: 'power2.in',
-                    onComplete() {
-                        from.classList.remove('active');
-                        from.style.zIndex = '';
-                        gsap.set(from, { x: 0 });
+function reveal(id){
+    const items=document.querySelectorAll('#'+id+' .si');
+    if(typeof gsap!=='undefined') gsap.fromTo(items,{opacity:0,y:18},{opacity:1,y:0,duration:0.4,stagger:0.07,ease:'power2.out'});
+    else items.forEach(el=>{el.style.opacity='1';el.style.transform='none';});
+}
 
-                        to.classList.add('active');
-                        to.scrollTop = 0;
-                        gsap.fromTo(to,
-                            { opacity: 0, x: 36 * dir },
-                            { opacity: 1, x: 0, duration: 0.28, ease: 'power2.out',
-                              onComplete() { busy = false; reveal(ids[i]); }
-                            }
-                        );
-                    }
-                });
-            } else {
-                from.classList.remove('active');
-                to.classList.add('active');
-                to.scrollTop = 0;
-                to.querySelectorAll('.si').forEach(el => {
-                    el.style.opacity = '1'; el.style.transform = 'none';
-                });
-                busy = false;
-            }
-            cur = i;
-        }
+tabs.forEach(t=>t.addEventListener('click',()=>goTo(+t.dataset.page)));
 
-        function reveal(id) {
-            const items = document.querySelectorAll('#' + id + ' .si');
-            if (typeof gsap !== 'undefined') {
-                gsap.fromTo(items,
-                    { opacity: 0, y: 18 },
-                    { opacity: 1, y: 0, duration: 0.4, stagger: 0.07, ease: 'power2.out' }
-                );
-            } else {
-                items.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
-            }
-        }
+let sx=0,sy=0;
+appEl.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+appEl.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.4) goTo(cur+(dx<0?1:-1),dx<0?1:-1);
+},{passive:true});
 
-        /* Tab clicks */
-        tabs.forEach(t => t.addEventListener('click', () => goTo(+t.dataset.page)));
-
-        /* Swipe */
-        let sx = 0, sy = 0;
-        appEl.addEventListener('touchstart', e => {
-            sx = e.touches[0].clientX; sy = e.touches[0].clientY;
-        }, { passive: true });
-
-        appEl.addEventListener('touchend', e => {
-            const dx = e.changedTouches[0].clientX - sx;
-            const dy = e.changedTouches[0].clientY - sy;
-            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) {
-                goTo(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
-            }
-        }, { passive: true });
-
-        /* Keyboard */
-        document.addEventListener('keydown', e => {
-            if (e.key === 'ArrowRight') goTo(cur + 1, 1);
-            if (e.key === 'ArrowLeft') goTo(cur - 1, -1);
-        });
-    })();
-    </script>
-
+document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight')goTo(cur+1,1);
+    if(e.key==='ArrowLeft')goTo(cur-1,-1);
+});
+})();
+</script>
 </body>
 </html>
