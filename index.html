@@ -10,6 +10,13 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta property="og:title" content="Annie's Birthdart Bash">
     <meta property="og:description" content="A birthday weekend celebration">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://annielovessnakes.com">
+    <meta property="og:image" content="https://annielovessnakes.com/images/hero-dance.jpg">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="535">
+    <meta property="og:image:alt" content="Annie on the dance floor">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F40D;</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,18 +27,18 @@
 
 <div class="grain" aria-hidden="true"></div>
 
-<nav class="nav-bar">
-    <button class="tab active" data-page="home"><span class="tab-icon">&#x1F40D;</span><span class="tab-label">Home</span></button>
-    <button class="tab" data-page="weekend"><span class="tab-icon">&#x1F37E;</span><span class="tab-label">Weekend</span></button>
-    <button class="tab" data-page="menu"><span class="tab-icon">&#x1F373;</span><span class="tab-label">Menu</span></button>
-    <button class="tab" data-page="pubs"><span class="tab-icon">&#x1F4DA;</span><span class="tab-label">R&eacute;sum&eacute;</span></button>
-    <button class="tab" data-page="gift"><span class="tab-icon">&#x1F381;</span><span class="tab-label">Gift</span></button>
+<nav class="nav-bar" role="tablist" aria-label="Site sections">
+    <button class="tab active" data-page="home" role="tab" id="tab-home" aria-selected="true" aria-controls="home" tabindex="0"><span class="tab-icon" aria-hidden="true">&#x1F40D;</span><span class="tab-label">Home</span></button>
+    <button class="tab" data-page="weekend" role="tab" id="tab-weekend" aria-selected="false" aria-controls="weekend" tabindex="-1"><span class="tab-icon" aria-hidden="true">&#x1F37E;</span><span class="tab-label">Weekend</span></button>
+    <button class="tab" data-page="menu" role="tab" id="tab-menu" aria-selected="false" aria-controls="menu" tabindex="-1"><span class="tab-icon" aria-hidden="true">&#x1F373;</span><span class="tab-label">Menu</span></button>
+    <button class="tab" data-page="pubs" role="tab" id="tab-pubs" aria-selected="false" aria-controls="pubs" tabindex="-1"><span class="tab-icon" aria-hidden="true">&#x1F4DA;</span><span class="tab-label">R&eacute;sum&eacute;</span></button>
+    <button class="tab" data-page="gift" role="tab" id="tab-gift" aria-selected="false" aria-controls="gift" tabindex="-1"><span class="tab-icon" aria-hidden="true">&#x1F381;</span><span class="tab-label">Gift</span></button>
 </nav>
 
 <main class="app">
 
     <!-- HOME -->
-    <section class="page active" id="home">
+    <section class="page active" id="home" role="tabpanel" aria-labelledby="tab-home" tabindex="0">
         <div class="page-content" style="display:flex;flex-direction:column;align-items:center;padding-top:8vh">
             <svg class="hero-snake-svg" viewBox="0 0 200 70" fill="none" aria-hidden="true">
                 <path class="snake-body" d="M8,35 C30,8 50,62 80,35 C110,8 130,62 160,35 C180,18 192,35 195,35" stroke="url(#sg)" stroke-width="6" stroke-linecap="round"/>
@@ -57,7 +64,7 @@
     </section>
 
     <!-- WEEKEND -->
-    <section class="page" id="weekend">
+    <section class="page" id="weekend" role="tabpanel" aria-labelledby="tab-weekend" tabindex="0">
         <div class="page-content">
             <div class="page-header si"><h2>The Weekend</h2><p>Here's what's goin' dahn. Take the vibes, leave the details. All activities and times are subject to change.</p></div>
             <div class="setlist">
@@ -78,7 +85,7 @@
     </section>
 
     <!-- MENU -->
-    <section class="page" id="menu">
+    <section class="page" id="menu" role="tabpanel" aria-labelledby="tab-menu" tabindex="0">
         <div class="page-content">
             <div class="menu-card si">
                 <div class="menu-ornament">&starf; &starf; &starf;</div>
@@ -109,7 +116,7 @@
     </section>
 
     <!-- PUBLICATIONS / RESUME -->
-    <section class="page" id="pubs">
+    <section class="page" id="pubs" role="tabpanel" aria-labelledby="tab-pubs" tabindex="0">
         <div class="page-content">
             <div class="page-header si">
                 <h2>The R&eacute;sum&eacute;</h2>
@@ -202,7 +209,7 @@
     </section>
 
     <!-- GIFT -->
-    <section class="page" id="gift">
+    <section class="page" id="gift" role="tabpanel" aria-labelledby="tab-gift" tabindex="0">
         <div class="page-content" style="display:flex;flex-direction:column;align-items:center;padding-top:20vh">
             <div class="gift-header si"><h2>One More Thing&hellip;</h2></div>
             <p class="gift-lead si">You hate gifts. We know.</p>
