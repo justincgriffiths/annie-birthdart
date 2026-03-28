@@ -102,7 +102,8 @@ test.describe('Typography', () => {
     await page.goto('/');
     const title = page.locator('.hero-title');
     const fill = await title.evaluate(el => getComputedStyle(el).webkitTextFillColor);
-    expect(fill).toBe('transparent');
+    // Chromium returns rgba(0,0,0,0) instead of "transparent"
+    expect(fill === 'transparent' || fill === 'rgba(0, 0, 0, 0)').toBe(true);
   });
 
   test('text is readable (not same color as background)', async ({ page }) => {

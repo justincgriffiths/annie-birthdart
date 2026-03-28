@@ -223,7 +223,7 @@
         .gift-reveal-btn:active { transform: scale(0.97); }
         .gift-reveal-btn-icon { font-size: 1.4rem; display: inline-block; animation: wiggle 1.5s ease-in-out infinite; }
         @keyframes wiggle { 0%, 100% { transform: rotate(0deg) scale(1); } 25% { transform: rotate(-10deg) scale(1.1); } 75% { transform: rotate(10deg) scale(1.1); } }
-        .gift-reveal-btn.revealed { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .gift-reveal-btn.revealed { opacity: 0; pointer-events: none; height: 0; overflow: hidden; padding: 0; margin: 0; border: 0; }
         .gift-reveal-panel { width: 100%; max-width: 440px; overflow: hidden; max-height: 0; opacity: 0; margin-top: 0; }
         .gift-reveal-panel.open { margin-top: 1.5rem; }
         .gift-video { width: 100%; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.35); margin-bottom: 1.5rem; }
