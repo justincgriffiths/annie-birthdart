@@ -72,7 +72,7 @@
 
         /* ===== APP SHELL ===== */
         .app {
-            position: fixed; top: var(--nav-h); bottom: 82px; left: 0; right: 0;
+            position: fixed; top: var(--nav-h); bottom: 0; left: 0; right: 0;
             overflow: hidden;
         }
         .page {
@@ -475,10 +475,7 @@
 
 </main>
 
-<div class="player-bar" id="player-bar">
-    <button class="player-toggle" id="player-toggle">&#x1F3B5; playlist</button>
-    <iframe src="https://open.spotify.com/embed/playlist/33kGXY5y48zLQULXEXdxOp?utm_source=generator&theme=0" height="80" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>
-</div>
+<!-- player-bar removed: Spotify embed returning 404. Fix on dev branch. -->
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
 <script>
