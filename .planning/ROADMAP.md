@@ -22,6 +22,12 @@
 
 **Goal:** Split the monolithic index.html into maintainable separate files, modernize the tab system, and ship low-effort improvements (OG image, ARIA) that make the site shareable and accessible.
 **Requirements:** ARCH-01, ARCH-02, ARCH-03, META-01, META-02
+**Plans:** 3 plans
+
+Plans:
+- [ ] 02-a-PLAN.md -- Extract CSS/JS into separate files, modernize tab system to DOM-driven IDs
+- [ ] 02-b-PLAN.md -- Add OG meta tags for social sharing and ARIA tab pattern for accessibility
+- [ ] 02-c-PLAN.md -- Update tests for new tab scheme, add extensibility/ARIA tests, final verification
 
 ### Success Criteria
 
