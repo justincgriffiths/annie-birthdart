@@ -71,7 +71,10 @@ test.describe('Tab navigation', () => {
 
   test('loading with hash navigates to correct page', async ({ page }) => {
     await page.goto('/#gift');
-    await page.waitForTimeout(1000);
+    await page.waitForFunction(() =>
+      document.getElementById('gift')?.classList.contains('active'),
+      null, { timeout: 5000 }
+    );
     await expect(page.locator('#gift')).toHaveClass(/active/);
   });
 

@@ -542,6 +542,12 @@ window.addEventListener('load',()=>{
     } else {reveal('home');}
 });
 
+window.addEventListener('hashchange',()=>{
+    const hash=location.hash.replace('#','');
+    const idx=ids.indexOf(hash);
+    if(idx>=0) goTo(idx);
+});
+
 function goTo(i,dir){
     if(i===cur||i<0||i>=ids.length||busy)return;
     busy=true; dir=dir??(i>cur?1:-1);
