@@ -98,9 +98,9 @@
         .page-header p { font-family: 'Caveat', cursive; font-size: 1.15rem; color: var(--cream-50); margin-top: 0.25rem; }
         .squiggle { display: block; width: 80px; height: 8px; margin: 0.75rem auto 0; }
         .photo { width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); margin: 1.25rem 0; display: block; }
-        .photo-row { display: flex; gap: 0.5rem; margin: 1.25rem 0; }
-        .photo-row .photo { flex: 1; min-width: 0; object-fit: cover; height: 200px; margin: 0; }
-        .photo-row .photo:only-child { height: auto; }
+        .photo-row { display: flex; gap: 0.5rem; margin: 1.25rem 0; align-items: center; }
+        .photo-row .photo { flex: 1; min-width: 0; object-fit: cover; aspect-ratio: 1; margin: 0; }
+        .photo-row .photo:only-child { aspect-ratio: auto; }
         .photo-caption { font-family: 'Caveat', cursive; font-size: 0.85rem; color: var(--cream-30); text-align: center; margin-top: -0.5rem; margin-bottom: 1rem; }
         .photo-strip { display: flex; gap: 0.75rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0.5rem 0 1rem; scrollbar-width: none; }
         .photo-strip::-webkit-scrollbar { display: none; }
@@ -642,8 +642,8 @@ function spawnConfetti(){
 if(giftBtn&&giftPanel) giftBtn.addEventListener('click',function(){
     giftBtn.setAttribute('aria-expanded','true');
     giftPanel.setAttribute('aria-hidden','false');
-    const vIframe=document.getElementById('gift-video-iframe');
-    if(vIframe&&vIframe.dataset.src&&!vIframe.src) vIframe.src=vIframe.dataset.src;
+    var vIframe=document.getElementById('gift-video-iframe');
+    if(vIframe&&vIframe.dataset.src) vIframe.src=vIframe.dataset.src;
     const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(typeof gsap!=='undefined'&&!prefersReduced){
         gsap.to(giftBtn,{opacity:0,scale:0.8,duration:0.3,ease:'power2.in',onComplete(){giftBtn.classList.add('revealed');}});
